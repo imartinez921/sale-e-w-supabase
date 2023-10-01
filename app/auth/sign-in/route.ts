@@ -5,6 +5,27 @@ import { NextResponse } from 'next/server'
 export const dynamic = 'force-dynamic'
 
 export async function GET(request: Request) {
+
+  // Create scopes for seller to authorize with Square
+  const scopesArray = [
+		"CUSTOMERS_WRITE",
+		"CUSTOMERS_READ",
+		"ITEMS_READ",
+		"ITEMS_WRITE",
+		"INVENTORY_WRITE",
+		"INVENTORY_READ",
+		"MERCHANT_PROFILE_WRITE",
+		"MERCHANT_PROFILE_READ",
+		"LOYALTY_READ",
+		"LOYALTY_WRITE",
+		"ORDERS_READ",
+		"SUBSCRIPTIONS_READ",
+		"SUBSCRIPTIONS_WRITE",
+		"PAYMENTS_READ",
+		"PAYMENTS_WRITE",
+		"CUSTOMERS_READ",
+  ];
+
 	const requestUrl = new URL(request.url);
 	const formData = await request.formData();
 	const email = String(formData.get("email"));
