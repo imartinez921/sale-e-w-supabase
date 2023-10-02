@@ -10,6 +10,7 @@
     "@supabase/supabase-js": "^2.37.0",
     "autoprefixer": "10.4.15",
     "next": "latest",
+    "oauth4webapi": "^2.3.0",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
