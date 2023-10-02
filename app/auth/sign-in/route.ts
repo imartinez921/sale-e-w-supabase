@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
 import { generateRandomState } from "oauth4webapi";
 
 export const dynamic = "force-dynamic";
@@ -28,15 +27,12 @@ const scopesArray = [
 export async function GET() {
 	// Create authorization url to redirect seller to Square auth page
 	// (https://developer.squareup.com/docs/oauth-api/create-urls-for-square-authorization)
-	// Example auth url for code flow (VS PKCE flow):
-	//  https://connect.squareup.com/oauth2/authorize?client_id={YOUR_APP_ID}
-	//    &scope=CUSTOMERS_WRITE+CUSTOMERS_READ&session=false
-	//    &state=82201dd8d83d23cc8a48caf52b
+	// 	Example auth url for code flow(VS PKCE flow):
+	// 		https://connect.squareup.com/oauth2/authorize?client_id={YOUR_APP_ID}
+	//    & scope=CUSTOMERS_WRITE + CUSTOMERS_READ & session=false
+	// 	& state=82201dd8d83d23cc8a48caf52b
 
-	const clientId =
-		process.env.ENVIRONMENT === "development"
-			? process.env.SANDBOX_APP_ID
-			: process.env.SQUARE_APP_ID;
+	const clientId = process.env.SANDBOX_APP_ID
 	const scopes = scopesArray.join("+");
 	// State is a randomized string used as a CSRF token
 	const state = generateRandomState();
