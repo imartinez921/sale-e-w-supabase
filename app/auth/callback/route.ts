@@ -15,10 +15,20 @@ export async function GET(request: NextRequest, response: NextResponse) {
 	const code = requestUrl.searchParams.get("code");
 	const paramsState = requestUrl.searchParams.get("state");
 
-	if (code && paramsState === stateCheck) {
+	if (paramsState === stateCheck) {
 		console.log("CSRF token: PASS");
 	} else {
-		console.log("CSRF token: FAIL");
+		return NextResponse.json({
+			errorMessage: "CSRF token check failed. Please try again.",
+		});
+	}
+
+	if (code) {
+		console.log("GOT AN AUTH CODE!");
+	} else {
+		return NextResponse.json({
+			errorMessage: "Authorization failed. Please try again.",
+		});
 	}
 
 	// URL to redirect to after sign in process completes
