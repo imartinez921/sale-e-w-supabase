@@ -1,54 +1,48 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export const dynamic = 'force-dynamic'
+import { generateRandomState } from "oauth4webapi";
 
-export async function GET(request: Request) {
+export const dynamic = "force-dynamic";
 
-  // Create scopes for seller to authorize with Square
-  const scopesArray = [
-		"CUSTOMERS_WRITE",
-		"CUSTOMERS_READ",
-		"ITEMS_READ",
-		"ITEMS_WRITE",
-		"INVENTORY_WRITE",
-		"INVENTORY_READ",
-		"MERCHANT_PROFILE_WRITE",
-		"MERCHANT_PROFILE_READ",
-		"LOYALTY_READ",
-		"LOYALTY_WRITE",
-		"ORDERS_READ",
-		"SUBSCRIPTIONS_READ",
-		"SUBSCRIPTIONS_WRITE",
-		"PAYMENTS_READ",
-		"PAYMENTS_WRITE",
-		"CUSTOMERS_READ",
-  ];
+// Create scopes for seller to authorize with Square
+const scopesArray = [
+	"CUSTOMERS_WRITE",
+	"CUSTOMERS_READ",
+	"ITEMS_READ",
+	"ITEMS_WRITE",
+	"INVENTORY_WRITE",
+	"INVENTORY_READ",
+	"MERCHANT_PROFILE_WRITE",
+	"MERCHANT_PROFILE_READ",
+	"LOYALTY_READ",
+	"LOYALTY_WRITE",
+	"ORDERS_READ",
+	"SUBSCRIPTIONS_READ",
+	"SUBSCRIPTIONS_WRITE",
+	"PAYMENTS_READ",
+	"PAYMENTS_WRITE",
+	"CUSTOMERS_READ",
+];
 
-	const requestUrl = new URL(request.url);
-	const formData = await request.formData();
-	const email = String(formData.get("email"));
-	const password = String(formData.get("password"));
-	const supabase = createRouteHandlerClient({ cookies });
+export async function GET() {
+	// Create authorization url to redirect seller to Square auth page
+	// (https://developer.squareup.com/docs/oauth-api/create-urls-for-square-authorization)
+	// Example auth url for code flow (VS PKCE flow):
+	//  https://connect.squareup.com/oauth2/authorize?client_id={YOUR_APP_ID}
+	//    &scope=CUSTOMERS_WRITE+CUSTOMERS_READ&session=false
+	//    &state=82201dd8d83d23cc8a48caf52b
 
-	const { error } = await supabase.auth.signInWithPassword({
-		email,
-		password,
-	});
-
-	if (error) {
-		return NextResponse.redirect(
-			`${requestUrl.origin}/login?error=Could not authenticate user`,
-			{
-				// a 301 status is required to redirect from a POST to a GET route
-				status: 301,
-			}
-		);
-	}
-
-	return NextResponse.redirect(requestUrl.origin, {
-		// a 301 status is required to redirect from a POST to a GET route
-		status: 301,
-	});
+	const clientId =
+		process.env.ENVIRONMENT === "development"
+			? process.env.SANDBOX_APP_ID
+			: process.env.SQUARE_APP_ID;
+	const scopes = scopesArray.join("+");
+	// State is a randomized string used as a CSRF token
+	const state = generateRandomState();
+	cookies().set("state", `${state}`);
+	// Since sellers may have multiple accounts, false will make user authorize each time
+	const session = false;
+	const authUrl = `https://connect.squareup.com/oauth2/authorize?client_id=${clientId}&scope=${scopes}&session=${session}&state=${state}`;
+	redirect(authUrl);
 }

@@ -76,8 +76,8 @@ export default async function Index() {
 					<br />
 					<br />
 					{/* TODO: Add authorization link to bring user to Square to log in */}
-					<a
-						href="http://localhost:3000"
+					<Link
+						href="/auth/sign-in"
 						className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
 						target="_blank"
 						rel="noopener noreferrer"
@@ -87,7 +87,7 @@ export default async function Index() {
 								Get started by logging into into your Square seller account.
 							</p>
 						</div>
-					</a>
+					</Link>
 				</div>
 
 				<div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
