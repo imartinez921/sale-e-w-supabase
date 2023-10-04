@@ -17,9 +17,9 @@ export async function POST(request: Request) {
 
 	// Enabling only ONE user, who is added to the users table thru dashboard
 	// Same info as Square Dashboard mutual account
-	email = `${process.env.FIRST_USER_EMAIL}`;
-	password = `${process.env.FIRST_USER_PASSWORD}`;
-    
+	// email = `${process.env.FIRST_USER_EMAIL}`;
+	// password = `${process.env.FIRST_USER_PASSWORD}`;
+
 	// This is supposed to be one of the log-ins that issues a JWT
 	await supabase.auth.signInWithPassword({
 		email,
