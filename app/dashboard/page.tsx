@@ -32,4 +32,10 @@ export default async function Dashboard() {
 
 	// TODO: Render corresponding components
 	// TODO: Layout.tsx to place components using Tremor UI
+    return (
+		<h1 className="text-foreground text-2xl font-bold mb-4">
+			You have successfully logged in.
+			<br /> Welcome to your dashboard page.
+		</h1>
+	);
 }
