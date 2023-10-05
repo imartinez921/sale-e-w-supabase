@@ -20,11 +20,11 @@ export async function GET(request: Request) {
 	const email = `${process.env.FIRST_USER_EMAIL}`;
 	const password = `${process.env.FIRST_USER_PASSWORD}`;
 
-	// Issues a JWT. Returns:
+	// Issues a JWT and returns:
 	// {data: {
-			// user: {id, aud: 'authenticated', email, phone}
-			// session: {access_token, token_type, refresh_token, etc.}
-
+			// user: {id, aud: 'authenticated', email, phone, etc.}
+			// session: {access_token, token_type, refresh_token, user, etc.}
+	// Note session also carries a user object
 	const printThis = await supabase.auth.signInWithPassword({
 		email,
 		password,
