@@ -4,7 +4,7 @@
 
 "use client";
 
-import Messages from "./messages"
+import Messages from "./messages";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -16,10 +16,14 @@ export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const router = useRouter();
+
+	// Gives Route Handler access to credentials in our .env
+	// Client component already has access to cookies
 	const supabase = createClientComponentClient<Database>();
 
-// Likely won't need signup, but leaving it here for now
-  const handleSignUp = async () => {
+	// Likely won't need signup, but leaving it here for now
+	const handleSignUp = async (e: React.FormEvent) => {
+		e.preventDefault();
 		await supabase.auth.signUp({
 			email: `${process.env.FIRST_USER_EMAIL}`,
 			password: `${process.env.FIRST_USER_PASSWORD}`,
@@ -29,14 +33,12 @@ export default function Login() {
 		});
 		router.refresh();
 	};
- 
-  const handleOnChange = (
-		e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+
+	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		(e.target as HTMLInputElement).name === "email"
 			? setEmail(e.target.value)
 			: setPassword(e.target.value);
-  };
+	};
 
 	return (
 		<div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
@@ -63,8 +65,7 @@ export default function Login() {
 
 			<form
 				className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-				action="/api/auth/login"
-				method="post"
+				method="get"
 			>
 				<label className="text-md" htmlFor="email">
 					Email
@@ -85,7 +86,6 @@ export default function Login() {
 					name="password"
 					placeholder="••••••••"
 				/>
-				<Link href={`${location.origin}/api/auth/logout`}>LOGOUT</Link>
 				<button
 					className="bg-green-700 rounded px-4 py-2 text-white mb-2"
 					onClick={handleSignUp}
