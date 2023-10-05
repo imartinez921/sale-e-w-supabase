@@ -10,10 +10,12 @@ export async function POST(request: Request) {
 	const requestUrl = new URL(request.url);
 	const supabase = createRouteHandlerClient<Database>({ cookies });
 
+	// Returns {error: null} if successful
 	const printThis = await supabase.auth.signOut();
-	console.log("LOGOUT RESPONSE", printThis);
+	console.log("LOGOUT RESPONSE", printThis.error);
 
 	return NextResponse.redirect(`${requestUrl.origin}`, {
+		// Redirects from a POST to a GET route
 		status: 301,
 	});
 }
