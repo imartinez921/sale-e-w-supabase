@@ -1,18 +1,22 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-
-import type { Database } from "@/lib/database.types";
+// import type { Database } from "@/lib/database.types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 // This is our logged-in user's home page
-export default async function Dashboard() {
+export default async function Dashboard(
+	{
+		children
+	}: {
+		children: React.ReactNode,
+	}) {
 	// Following https://youtu.be/-7K6DRWfEGM?si=6amjfTk8TZFzeKyQ&t=283
 	// Docs have some outdated code:
 	// https://supabase.com/docs/guides/auth/auth-helpers/nextjs?language=ts#server-components
 
 	// Give this server component access to cookies
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const supabase = createServerComponentClient({ cookies });
 
 	// Check if user is logged in
 	const {
@@ -27,13 +31,13 @@ export default async function Dashboard() {
 	// TODO?: Fetch past email campaigns data from Supabase and pass to corresponding component to render
 	// I still need to add catalog test data to Supabase to test this connection
 	const { data } = await supabase.from("catalog").select();
-	
-    // Testing: Pretty print result
+
+	// Testing: Pretty print result
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
 
 	// TODO: Render corresponding components
 	// TODO: Layout.tsx to place components using Tremor UI
-    return (
+	return (
 		<>
 			<Link
 				href="/"

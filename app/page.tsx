@@ -2,20 +2,22 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-import type { Database } from "@/lib/database.types";
+// import type { Database } from "@/lib/database.types";
 
 import LoginButton from "../components/LoginButton";
 import LogoutButton from "../components/LogoutButton";
 import SupabaseLogo from "../components/SupabaseLogo";
 import NextJsLogo from "../components/NextJsLogo";
 import DeployButton from "../components/DeployButton";
+import DashboardPage from "./dashboard/page";
+import CustomerServerComponent from "./dashboard/customers/page";
 
 export const dynamic = "force-dynamic";
 
 // TODO: Fix hydration UI error due to component structure
 export default async function Index() {
 	// Give this server component access to cookies
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const supabase = createServerComponentClient({ cookies });
 
 	// Check if user is logged in
 	let email = "";
@@ -39,10 +41,17 @@ export default async function Index() {
 
 			<div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
 				<div className="flex flex-col items-center mb-4 lg:mb-12">
+
 					{session ? (
 						<>
 							<h1>Welcome, {email}</h1>
 							<LogoutButton />
+							<div className="flex gap-8 justify-center items-center">
+								<DashboardPage>
+
+								</DashboardPage>
+								{/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */}
+							</div>
 						</>
 					) : (
 						<LoginButton />
