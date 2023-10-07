@@ -1,6 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import type { Database } from "@/lib/database.types";
+// import type { Database } from "@/lib/database.types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -16,7 +16,7 @@ export default async function Dashboard(
 	// https://supabase.com/docs/guides/auth/auth-helpers/nextjs?language=ts#server-components
 
 	// Give this server component access to cookies
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const supabase = createServerComponentClient({ cookies });
 
 	// Check if user is logged in
 	const {
