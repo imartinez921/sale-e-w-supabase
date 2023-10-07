@@ -18,11 +18,11 @@ const seedSquareCustomersAPI = async () => {
   }
 }
 
-const listSquareCustomersAddToLoyalty = async () => {
+const listSquareCustomers = async () => {
   try {
     const response = await client.customersApi.listCustomers();
 
-    console.log(response)
+    console.log(response.result)
     return response.result;
   } catch (error) {
     console.log(error)
@@ -33,10 +33,14 @@ const listSquareCustomersAddToLoyalty = async () => {
 
 export const dynamic = 'force-dynamic';
 
-export default async function CustomerServerComponent() {
+export default async function CustomerServerComponent({
+  supabase,
+}: {
+  supabase: any
+}) {
 
   // seedSquareCustomersAPI();
-  listSquareCustomersAddToLoyalty();
+  listSquareCustomers();
 
 
   return (
