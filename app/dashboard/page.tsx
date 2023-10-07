@@ -2,10 +2,10 @@
 
 export default function DashboardPage({
   children,
-  supabase,
+  // supabase,
 }: {
   children: React.ReactNode,
-  supabase: any
+  // supabase: any 
 }) {
   return (<div className="bg-gray-100">
     {children}

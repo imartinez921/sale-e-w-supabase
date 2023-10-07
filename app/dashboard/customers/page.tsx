@@ -1,3 +1,5 @@
+"use server"
+
 import { client } from "@/app/api/square/square-api"
 import { customersCreationData } from "@/app/utils/customer-data-array"
 
@@ -29,10 +31,6 @@ const listSquareCustomers = async () => {
   }
 }
 
-
-
-export const dynamic = 'force-dynamic';
-
 export default async function CustomerServerComponent({
   supabase,
 }: {
@@ -40,8 +38,9 @@ export default async function CustomerServerComponent({
 }) {
 
   // seedSquareCustomersAPI();
-  listSquareCustomers();
+  const customerList = listSquareCustomers();
 
+  console.log(customerList)
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">

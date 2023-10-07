@@ -66,7 +66,7 @@ export default async function Index() {
 				<div className="flex flex-col items-center mb-4 lg:mb-12">
 					<div className="flex gap-8 justify-center items-center">
 
-						<DashboardPage supabase={supabase}>
+						<DashboardPage>
 							<CustomerServerComponent supabase={supabase} />
 						</DashboardPage>
 					</div>
