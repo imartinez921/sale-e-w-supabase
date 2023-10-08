@@ -152,13 +152,12 @@ export const catalog_data_array = [
                 }
             ]
         }
-    },
-    {
+    }, {
         type: 'CATEGORY',
-        id: '#Clothing',
+        id: '#MusicalInstruments',
         presentAtAllLocations: true,
         categoryData: {
-            name: 'Clothing'
+            name: 'Musical Instruments'
         }
     },
     {
@@ -251,6 +250,14 @@ export const catalog_data_array = [
                     }
                 }
             ]
+        }
+    },
+    {
+        type: 'CATEGORY',
+        id: '#Clothing',
+        presentAtAllLocations: true,
+        categoryData: {
+            name: 'Clothing'
         }
     },
     {
