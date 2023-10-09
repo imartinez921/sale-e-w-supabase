@@ -6,8 +6,6 @@ import Link from "next/link";
 
 import LoginButton from "./components/nav/LoginButton";
 import LogoutButton from "./components/nav/LogoutButton";
-import SupabaseLogo from "./components/nav/SupabaseLogo";
-import NextJsLogo from "./components/nav/NextJsLogo";
 import DashboardPage from "./dashboard/page";
 import CustomerServerComponent from "./dashboard/customers/page";
 import CatalogDetail from "./dashboard/catalog/page";
@@ -55,16 +53,7 @@ export default async function Index() {
 
 				<div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
-				<div className="flex justify-center text-center text-xs">
-					Powered by{" "}
-					<div className="flex gap-8 justify-center items-center">
-						<Link href="https://supabase.com/" target="_blank">
-							<SupabaseLogo />
-						</Link>
-						<span className="border-l rotate-45 h-6" />
-						<NextJsLogo />
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	);
