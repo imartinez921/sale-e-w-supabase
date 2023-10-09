@@ -4,10 +4,10 @@ import Link from "next/link";
 
 // import type { Database } from "@/lib/database.types";
 
-import LoginButton from "../components/LoginButton";
-import LogoutButton from "../components/LogoutButton";
-import SupabaseLogo from "../components/SupabaseLogo";
-import NextJsLogo from "../components/NextJsLogo";
+import LoginButton from "./components/nav/LoginButton";
+import LogoutButton from "./components/nav/LogoutButton";
+import SupabaseLogo from "./components/nav/SupabaseLogo";
+import NextJsLogo from "./components/nav/NextJsLogo";
 import DashboardPage from "./dashboard/page";
 import CustomerServerComponent from "./dashboard/customers/page";
 import CatalogDetail from "./dashboard/catalog/page";
@@ -32,7 +32,7 @@ export default async function Index() {
 	}
 
 	return (
-		<div className="w-full flex flex-col items-center">
+		<div className="w-full flex flex-col items-center">	
 
 			<div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
 				<div className="flex flex-col items-center mb-4 lg:mb-12">
