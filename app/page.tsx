@@ -32,19 +32,15 @@ export default async function Index() {
 	}
 
 	return (
-		<div className="w-full flex flex-col items-center">	
-
+		<div className="w-full flex flex-col items-center">
 			<div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
 				<div className="flex flex-col items-center mb-4 lg:mb-12">
-
 					{session ? (
 						<>
 							<h1>Welcome, {email}</h1>
 							<LogoutButton />
 							<div className="flex gap-8 justify-center items-center">
-								<DashboardPage>
-
-								</DashboardPage>
+								<DashboardPage></DashboardPage>
 								{/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */}
 								{/* <CatalogDetail children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */}
 							</div>
@@ -60,16 +56,14 @@ export default async function Index() {
 				<div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
 				<div className="flex justify-center text-center text-xs">
-					<p>
-						Powered by{" "}
-						<div className="flex gap-8 justify-center items-center">
-							<Link href="https://supabase.com/" target="_blank">
-								<SupabaseLogo />
-							</Link>
-							<span className="border-l rotate-45 h-6" />
-							<NextJsLogo />
-						</div>
-					</p>
+					Powered by{" "}
+					<div className="flex gap-8 justify-center items-center">
+						<Link href="https://supabase.com/" target="_blank">
+							<SupabaseLogo />
+						</Link>
+						<span className="border-l rotate-45 h-6" />
+						<NextJsLogo />
+					</div>
 				</div>
 			</div>
 		</div>
