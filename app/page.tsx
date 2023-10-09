@@ -11,6 +11,7 @@ import NextJsLogo from "../components/NextJsLogo";
 import DeployButton from "../components/DeployButton";
 import DashboardPage from "./dashboard/page";
 import CustomerServerComponent from "./dashboard/customers/page";
+import CatalogDetail from "./dashboard/catalog/page";
 
 export const dynamic = "force-dynamic";
 
@@ -51,6 +52,7 @@ export default async function Index() {
 
 								</DashboardPage>
 								{/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */}
+								{/* <CatalogDetail children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */}
 							</div>
 						</>
 					) : (
