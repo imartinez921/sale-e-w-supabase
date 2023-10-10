@@ -7,7 +7,6 @@ import LogoutButton from "./components/nav/LogoutButton";
 
 export const dynamic = "force-dynamic";
 
-// TODO: Fix hydration UI error due to component structure
 export default async function Index() {
 	// Give this server component access to cookies
 	const supabase = createServerComponentClient({ cookies });
