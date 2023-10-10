@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Apply margin of 15px to the entire document using Tailwind CSS */
+
+body {
+  margin: 15px;
+}
