@@ -13,7 +13,6 @@ export async function middleware(req: NextRequest) {
 	const {
 		data: { session },
 	} = await supabase.auth.getSession();
-  console.log("SESSION", session)
 	
   // Check if user is logged in and redirect if necessary
 	if (!session && req.url.includes("dashboard")) {
