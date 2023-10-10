@@ -29,7 +29,7 @@ export default async function DashboardPage({
 		/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */
 	}
 	{
-		/* <CatalogDetail children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */
+		/* <CatalogPage children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */
 	}
 	// TODO?: Fetch past email campaigns data from Supabase and pass to corresponding component to render
 	// I still need to add catalog test data to Supabase to test this connection
