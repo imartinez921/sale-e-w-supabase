@@ -6,13 +6,13 @@ interface ButtonProps {
 	buttonText?: string;
 }
 
-export default function Button({
+export default function NavButton({
 	path = "/dashboard",
 	buttonText = "Home",
 }: ButtonProps) {
 	const router = useRouter();
 	const currPath = usePathname();
-    
+
 	// Back behavior depends on whether on child page of dashboard or on dashboard itself
 	path = currPath === "/dashboard" ? "/" : path;
 

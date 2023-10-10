@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-import Button from "./components/nav/button";
+import NavButton from "./components/nav/NavButton";
 import LoginButton from "./components/nav/LoginButton";
 import LogoutButton from "./components/nav/LogoutButton";
 import DashboardPage from "./dashboard/page";
@@ -35,7 +35,7 @@ export default async function Index() {
 					{session ? (
 						<>
 							<h1>Welcome, {email}</h1>
-							<Button buttonText="Enter Your Dashboard" />
+							<NavButton buttonText="Enter Your Dashboard" />
 							<LogoutButton />
 						</>
 					) : (

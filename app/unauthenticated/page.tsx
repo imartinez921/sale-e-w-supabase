@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-import BackButton from "../components/nav/BackButton";
+import NavButton from "../components/nav/NavButton";
 
 
 export default async function Unauthenticated() {
@@ -19,7 +19,7 @@ export default async function Unauthenticated() {
 	}
 	return (
 		<>
-			<BackButton buttonText="Back" path="/" />
+			<NavButton buttonText="Back" path="/" />
 			<h1 className="text-foreground text-2xl font-bold mb-4">
 				To continue using this app, please sign in.
 			</h1>

@@ -3,8 +3,6 @@ import { cookies } from "next/headers";
 
 import { redirect } from "next/navigation";
 
-import Button from "../components/nav/button";
-
 // This is the main overview page after logging in
 export default async function DashboardPage({
 	children,

@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "../components/nav/button";
+import NavButton from "../components/nav/NavButton";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +15,7 @@ export default function DashboardLayout({
 		// Main is everything except the header and the footer
 		<main>
 			<nav>
-				<Button buttonText="Back" />
+				<NavButton buttonText="Back" />
 			</nav>
 			{children}
 		</main>
