@@ -1,6 +1,5 @@
 import "./globals.css";
 
-import Header from "./components/nav/header";
 import Footer from "./components/nav/footer";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +18,6 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				<div>
-					<Header />
 					<main>{children}</main>
 					<Footer />
 				</div>
