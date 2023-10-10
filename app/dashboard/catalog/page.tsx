@@ -15,35 +15,37 @@ export async function createCatalog() {
 				},
 			],
 		});
-
-		let catalogArray: {
-			id: string;
-			name?: string;
-			description?: string;
-		}[] = [];
-		response.then((response) => {
-			response.result.objects?.map((catalogObject) => {
-				// Skip category items
-				if (catalogObject.type !== "ITEM") return;
-				const itemData = catalogObject.itemData;
-				const itemObject = {
-					id: catalogObject.id,
-					name: itemData?.name || undefined,
-					description: itemData?.description || undefined,
-				};
-				catalogArray.push(itemObject);
-			});
-			console.log(catalogArray);
-			return catalogArray;
-		});
 	} catch (e) {
 		console.log(e);
 	}
 };
 
-export default async function CatalogPage({children}: {children: ReactNode}) {
-	// const catalogData = createCatalog()
-	// console.log(catalogData);
+export async function catalogListing() {
+	try {
+		const response = await client.catalogApi.listCatalog();
+
+		// console.log(response.result);
+		return response.result;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export default async function CatalogPage({ children }: { children: ReactNode }) {
+	const catalogData = await catalogListing();
+	console.log("THIS IS CATALOG DATA START")
+	catalogData?.objects?.forEach(item => {
+		console.log(item?.itemData);
+		// For putting it in the catalog listing tsx UI, you'd probably do something like:
+		// catalogData?.objects?.map( item => {
+		//(
+		// <ul>
+		// <li> item.name </li>
+		// </ul>
+		// etc etc
+		//)
+		// } )
+	});
 	return (
 		// <CatalogTable data={catalogData} />
 		<h1>This is catalog page</h1>
