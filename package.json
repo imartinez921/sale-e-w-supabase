@@ -8,6 +8,7 @@
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.8.1",
     "@supabase/supabase-js": "^2.37.0",
+    "@tremor/react": "^3.8.2",
     "autoprefixer": "10.4.15",
     "next": "latest",
     "oauth4webapi": "^2.3.0",
