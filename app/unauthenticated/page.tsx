@@ -1,22 +1,7 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import Link from "next/link";
-
 import NavButton from "../components/nav/NavButton";
 
 
 export default async function Unauthenticated() {
-	// Give this server component access to cookies
-	const supabase = createServerComponentClient<Database>({ cookies });
-
-	// Check if user is logged in
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();
-	if (session) {
-		redirect("/dashboard");
-	}
 	return (
 		<>
 			<NavButton buttonText="Back" path="/" />

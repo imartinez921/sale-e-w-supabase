@@ -13,14 +13,6 @@ export default async function DashboardPage({
 	// Give this server component access to user's cookies
 	const supabase = createServerComponentClient({ cookies });
 
-	// Check if user is logged in
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();
-	if (!session) {
-		redirect("/unauthenticated");
-	}
-
     // Execute all data to be passed to props here
 	// TODO: Fetch catalog data from Supabase and pass to corresponding component to render
 	// TODO: Fetch customer data from Supabase and pass to corresponding component to render
