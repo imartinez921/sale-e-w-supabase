@@ -1,17 +1,28 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
+import {
+	Card,
+	Grid,
+	Title,
+	Text,
+	Tab,
+	TabList,
+	TabGroup,
+	TabPanel,
+	TabPanels,
+} from "@tremor/react";
+
 // This is the main overview page after logging in
 export default async function DashboardPage({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
-	
 	// Give this server component access to user's cookies
 	const supabase = createServerComponentClient({ cookies });
 
-    // Execute all data to be passed to props here:
+	// Execute all data to be passed to props here:
 	// TODO: Fetch catalog data from Supabase and pass to corresponding component to render
 	// TODO: Fetch customer data from Supabase and pass to corresponding component to render
 	{
@@ -28,13 +39,52 @@ export default async function DashboardPage({
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
 
 	return (
-		<>
-			<h1 className="text-foreground text-2xl font-bold mb-4">
-				Welcome to your dashboard page.
-			</h1>
-			<main>
-                {/* TODO: Import viewcomponents here: pass results of above as data prop */}
-            </main>
-		</>
+		<main>
+			<Title>Dashboard</Title>
+			<Text>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+			</Text>
+
+			<TabGroup className="mt-6">
+				<TabList>
+					<Tab>Page 1</Tab>
+					<Tab>Page 2</Tab>
+				</TabList>
+				<TabPanels>
+					<TabPanel>
+						<Grid
+							numItemsMd={2}
+							numItemsLg={3}
+							className="gap-6 mt-6"
+						>
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-28" />
+							</Card>
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-28" />
+							</Card>
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-28" />
+							</Card>
+						</Grid>
+						<div className="mt-6">
+							<Card>
+								<div className="h-80" />
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<div className="h-96" />
+							</Card>
+						</div>
+					</TabPanel>
+				</TabPanels>
+			</TabGroup>
+		</main>
 	);
 }
