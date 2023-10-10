@@ -1,8 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-import { redirect } from "next/navigation";
-
 // This is the main overview page after logging in
 export default async function DashboardPage({
 	children,
@@ -13,7 +11,7 @@ export default async function DashboardPage({
 	// Give this server component access to user's cookies
 	const supabase = createServerComponentClient({ cookies });
 
-    // Execute all data to be passed to props here
+    // Execute all data to be passed to props here:
 	// TODO: Fetch catalog data from Supabase and pass to corresponding component to render
 	// TODO: Fetch customer data from Supabase and pass to corresponding component to render
 	{
