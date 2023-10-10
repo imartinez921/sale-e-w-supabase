@@ -1,12 +1,13 @@
+import Link from "next/link";
+
+import { Divider } from "@tremor/react";
 import SupabaseLogo from "./SupabaseLogo";
 import NextJsLogo from "./NextJsLogo";
-
-import Link from "next/link";
 
 export default function Footer() {
 	return (
 		<footer>
-			<>I'M A FOOTER</>
+			<Divider />
 			<div className="flex justify-center text-center text-xs">
 				Powered by{" "}
 				<div className="flex gap-8 justify-center items-center">
