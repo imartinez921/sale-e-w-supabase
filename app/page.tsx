@@ -2,8 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-// import type { Database } from "@/lib/database.types";
-
+import Button from "./components/nav/button";
 import LoginButton from "./components/nav/LoginButton";
 import LogoutButton from "./components/nav/LogoutButton";
 import DashboardPage from "./dashboard/page";
@@ -36,12 +35,8 @@ export default async function Index() {
 					{session ? (
 						<>
 							<h1>Welcome, {email}</h1>
+							<Button buttonText="Enter Your Dashboard" />
 							<LogoutButton />
-							<div className="flex gap-8 justify-center items-center">
-								<DashboardPage></DashboardPage>
-								{/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */}
-								{/* <CatalogDetail children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */}
-							</div>
 						</>
 					) : (
 						<LoginButton />
@@ -52,8 +47,6 @@ export default async function Index() {
 				</div>
 
 				<div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
-
-				
 			</div>
 		</div>
 	);
