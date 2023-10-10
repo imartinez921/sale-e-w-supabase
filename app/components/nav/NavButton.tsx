@@ -1,6 +1,8 @@
 "use client";
 import { useRouter, usePathname } from "next/navigation";
 
+import { Button } from "@tremor/react";
+
 interface ButtonProps {
 	path?: string;
 	buttonText?: string;
@@ -23,7 +25,9 @@ export default function NavButton({
 
 	return (
 		<>
-			<button onClick={handleClick}>{buttonText}</button>
+			<Button size="xs" variant="secondary" onClick={handleClick}>
+				{buttonText}
+			</Button>
 		</>
 	);
 }
