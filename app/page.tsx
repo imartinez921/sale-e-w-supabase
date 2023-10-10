@@ -25,25 +25,21 @@ export default async function Index() {
 	}
 
 	return (
-		<div className="w-full flex flex-col items-center">
-			<div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
-				<div className="flex flex-col items-center mb-4 lg:mb-12">
-					{session ? (
-						<>
-							<h1>Welcome, {email}</h1>
-							<NavButton buttonText="Enter Your Dashboard" />
-							<LogoutButton />
-						</>
-					) : (
-						<LoginButton />
-					)}
-					<h1 className="sr-only">
-						Supabase and Next.js Starter Template
-					</h1>
-				</div>
-
-				<div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+		<main>
+			<div className="animate-in">
+				{session ? (
+					<>
+						<h1>Welcome, {email}</h1>
+						<NavButton buttonText="Enter Your Dashboard" />
+						<LogoutButton />
+					</>
+				) : (
+					<LoginButton />
+				)}
+				<h1 className="sr-only">
+					Supabase and Next.js Starter Template
+				</h1>
 			</div>
-		</div>
+		</main>
 	);
 }
