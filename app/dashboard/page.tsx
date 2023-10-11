@@ -1,6 +1,10 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
+import AppLogo from "../components/nav/logo";
+import NavButton from "../components/nav/NavButton";
+import CatalogPage from "./catalog/page.tsx";
+
 import {
 	Card,
 	Grid,
@@ -37,7 +41,78 @@ export default async function DashboardPage({
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
 
 	return (
+		// Main is everything except the header and the footer
 		<main>
+			<AppLogo width={250} />
+			<NavButton buttonText="Back" />
+			<Title>Dashboard</Title>
+			<Text>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+			</Text>
+
+			<TabGroup className="mt-6">
+				<TabList>
+					<Tab>Overview</Tab>
+					<Tab>Orders</Tab>
+					<Tab>Customers</Tab>
+					<Tab>Catalog</Tab>
+					<Tab>Email Campaigns</Tab>
+				</TabList>
+				<TabPanels>
+					<TabPanel>
+						<Grid
+							numItemsMd={2}
+							numItemsLg={3}
+							className="gap-6 mt-6"
+						>
+							{/* Parallel routes allow for loading multiple routes at once */}
+							{/* https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#convention */}
+							<CatalogPage>Catalog</CatalogPage>
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-28" />
+							</Card>
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-28" />
+							</Card>
+						</Grid>
+						<div className="mt-6">
+							<Card>
+								<div className="h-80" />
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<div className="h-96" />
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<div className="h-96" />
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<CatalogPage>Catalog</CatalogPage>
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<div className="h-96" />
+							</Card>
+						</div>
+					</TabPanel>
+				</TabPanels>
+			</TabGroup>
 		</main>
 	);
 }
