@@ -38,7 +38,7 @@ export default async function CatalogPage() {
 	let catalogArray: {
 		name: string;
 		description: string;
-		priceMoney: { amount: BigInt | null | undefined; currency: string };
+		price: string | null | undefined;
 	}[] = [];
 	catalogData?.objects?.map((catalogObject) => {
 		// Skip category items
@@ -53,10 +53,7 @@ export default async function CatalogPage() {
 					name: itemData.name + " (" + variation?.itemVariationData?.name + ")" || "",
 					description: itemData?.description || "",
 					// This value is a BigInt so convert to string
-					priceMoney: {
-						amount: variation?.itemVariationData?.priceMoney?.amount,
-						currency: " USD" || "0 USD",
-					}
+					price: `${variation?.itemVariationData?.priceMoney?.amount}` + " USD" || "0 USD",
 				};
 				catalogArray.push(itemObject);
 			});
