@@ -32,8 +32,6 @@ export default async function DashboardPage({
 		/* <CatalogPage children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */
 	}
 	// TODO?: Fetch past email campaigns data from Supabase and pass to corresponding component to render
-	// I still need to add catalog test data to Supabase to test this connection
-	const { data } = await supabase.from("catalog").select();
 
 	// Testing: Pretty print result
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
