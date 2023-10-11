@@ -33,12 +33,12 @@ export async function catalogListing() {
 	}
 }
 
-export default async function CatalogPage(){
+export default async function CatalogPage() {
 	const catalogData = await catalogListing();
 	let catalogArray: {
 		name: string;
 		description: string;
-		priceMoney: { amount: number; currency: string };
+		priceMoney: { amount: BigInt | null | undefined; currency: string };
 	}[] = [];
 	catalogData?.objects?.map((catalogObject) => {
 		// Skip category items
@@ -49,13 +49,14 @@ export default async function CatalogPage(){
 			itemData.variations.map((variation) => {
 				// console.log(variation.itemVariationData);
 				const itemObject = {
-					id: variation.itemVariationData.itemId,
-					name: itemData.name + " (" + variation.itemVariationData.name + ")" || "",
+					id: variation.itemVariationData?.itemId,
+					name: itemData.name + " (" + variation?.itemVariationData?.name + ")" || "",
 					description: itemData?.description || "",
 					// This value is a BigInt so convert to string
-					price:
-						"$" + variation?.itemVariationData.priceMoney?.amount.toString() +
-							" USD" || "0 USD",
+					priceMoney: {
+						amount: variation?.itemVariationData?.priceMoney?.amount,
+						currency: " USD" || "0 USD",
+					}
 				};
 				catalogArray.push(itemObject);
 			});
