@@ -65,8 +65,7 @@ export default async function DashboardPage({
 							numItemsLg={3}
 							className="gap-6 mt-6"
 						>
-							{/* Parallel routes allow for loading multiple routes at once */}
-							{/* https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#convention */}
+	{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
 								<CatalogPage />
 							<Card>
 								{/* Placeholder to set height */}
