@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sale-e-discount-ai",
+  "private_key_id": "ce875ea2d7f50e768ade98435e8422973b3476f5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBS2xxMeOHdkeh\nc3z2NIHF/OLUCPWK6gk2I1MmmU57u8vY8aLJokgjMS4Xhuo5BxdJeJn/PWRQx6LR\nTO1lH8qh4vzOQP608K0JadnAz06WFxvNyAOK3VKAZLFaScMC10JawIjnWzlPBOu8\nUEYqrPKzUH27hIEXJXPE+/ycDRsFWq0dXpfW9sD4YSUDH2NgkKoVo73frMYvd3wp\n8oMJjUQAauQqJdsnsbYetBmJvbHtQxEuhXo7K0px68IBQMZX7UxR0XCYdTr9Jjm3\nhFNdlNNV50kKnB3XVqzPVPW9sqkrL7Kk70rcUq8DW9Pyy11DcJEQVY39UxlMQ984\nkDqKhwadAgMBAAECggEARNWhvBvKjaJ69s1kSl8/eazJcD3yhzI57owc3+mHb/vc\nJ5lBYfHHI7UvV1SF06IpUlI+8QzBTR0S59svzSvJouXtJlwx+GifDnOiBo4sy7lV\n/u3ECS8w4qU5HVCYQEo9CIl5F36+hVvYwTqLCkaFtYKsC9uvhvkg5ZzhBAeMwFY/\n+xFuiiFca6CfRSd6YTUGw6i5nLAH01bXq40ACtaiEXC9AgQ8sI+2r/B6n6+PF9jf\nR6w4OHCSDOlS6df30EzjUw0JLSHb1KnWh+ff9J1QFcv0AaExRbeCpWHVyP6Ypc/u\npzJbKGoMb3QBuJ0wRklN4WpJX8gT5qpZEjSjDrSB5wKBgQDtccR9p25RSKRQaXpG\nTiLOU+DyvqazAwYbR9StfMIpm5kdeyQT8GOaR1Xy81Z/S5W4DUaNRS6Trl4xfIAG\n11Dqekp/dsKkIxyj5MAEPtUE7BhK4OIzgmaRiUyi/wd5zlAXRx6wgAFAT8wMEygX\nwMFYcttxVt5OaZXBvpC2AQfQNwKBgQDQZmkUpUlIHa3viXlUluy5544B9sfR+EXB\nL9BG31roX9d1Z/EMVuLL2ok23oLlnR6x5sfyMPx5A5ubVQiZSJADZkSrk0rNDgXu\nMT/VHhaRo2w9t2qF1x1qXeEbckr4B9oUMxXDnK/506K46Rl67J9IB5hBzS1kr0QF\nN9B60f7tywKBgQCHy73tgxkTgbD/kCNvG/bJ+6y2B5U84ejXJ1CZ27ULqMJ72tY6\nVQwRyuR76vE4IhlBRs5nsv49VcbnFGYAA5pyT3hVx6zvxGj3zraGdwzLIN+Py2dy\nwAw7BcP/oE09O2IQvgruNHcCueBfs4EFfKbXF/Eqs9y2CaqtQHhwrswyJwKBgQC1\nwxyTbTXlOD2kVnsEVD5URqmM/Ph7Idd1D4bQya44Tp9VPzr2UDGvKwPSX3A7ZDaJ\nY4ewrRkHUyY87IV7a9ZvoJr0KptrDXgOr9XEw2Fb1PVrPrYh1eVKCGd10NGiUvbZ\n91RcMCUr+HJMZMJcfFTQNg+OFK4qytLA2lVzSgTW0QKBgEJxT+X8oa45mznWvvq7\npwR4i8TJ0sEG6FkfjrTgSZSrX5mrH4AHXoBmLv407P2nUOWKd/PU0XMd4OYdy5l+\nWmnpiSL0oYUu/W32Yw6vQX4Uvvevu6xLNZYduNSNRv8WxcIdFIvkroroV9UBELZr\n84CJwsdtWaex3fYpVY1LLLlN\n-----END PRIVATE KEY-----\n",
+  "client_email": "sale-e-vertex-ai@sale-e-discount-ai.iam.gserviceaccount.com",
+  "client_id": "102637932412648956963",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sale-e-vertex-ai%40sale-e-discount-ai.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

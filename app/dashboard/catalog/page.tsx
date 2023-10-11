@@ -2,24 +2,62 @@ import { ReactNode } from "react";
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
+import CatalogTable from "../../components/catalog/catalog_table.jsx";
 
-const uploadCatalog = async () => {
+export const dynamic = "force-dynamic";
+
+// Uploads items from sample catalog data to Square
+export async function createCatalog() {
 	try {
 		const response = client.catalogApi.batchUpsertCatalogObjects({
 			idempotencyKey: crypto.randomUUID(),
-			batches: [{
-				objects: catalog_data_array
-			}]
-		})
-
-		console.log((await response).result)
+			batches: [
+				{
+					objects: catalog_data_array,
+				},
+			],
+		});
 	} catch (e) {
-		console.log(e)
+		console.log(e);
 	}
 }
 
-export default function CatalogDetail({ children }: { children: ReactNode }) {
-	uploadCatalog();
+export async function catalogListing() {
+	try {
+		const response = await client.catalogApi.listCatalog();
 
-	return <main className="p-4 md:p-10 mx-auto max-w-7xl">{children}</main>;
+		// console.log(response.result);
+		return response.result;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export default async function CatalogPage() {
+	const catalogData = await catalogListing();
+	let catalogArray: {
+		name: string;
+		description: string;
+		price: string | null | undefined;
+	}[] = [];
+	catalogData?.objects?.map((catalogObject) => {
+		// Skip category items
+		if (catalogObject.type !== "ITEM") return;
+		// Key into each item and pull out variations
+		const itemData = catalogObject.itemData;
+		if (itemData?.variations) {
+			itemData.variations.map((variation) => {
+				// console.log(variation.itemVariationData);
+				const itemObject = {
+					id: variation.itemVariationData?.itemId,
+					name: itemData.name + " (" + variation?.itemVariationData?.name + ")" || "",
+					description: itemData?.description || "",
+					// This value is a BigInt so convert to string
+					price: `${variation?.itemVariationData?.priceMoney?.amount}` + " USD" || "0 USD",
+				};
+				catalogArray.push(itemObject);
+			});
+		}
+	});
+	return <CatalogTable data={catalogArray} />;
 }
