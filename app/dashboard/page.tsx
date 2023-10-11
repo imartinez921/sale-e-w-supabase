@@ -1,68 +1,117 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-// import type { Database } from "@/lib/database.types";
-import Link from "next/link";
-import { redirect } from "next/navigation";
 
-// This is our logged-in user's home page
-export default async function Dashboard(
-	{
-		children
-	}: {
-		children: React.ReactNode,
-	}) {
-	// Following https://youtu.be/-7K6DRWfEGM?si=6amjfTk8TZFzeKyQ&t=283
-	// Docs have some outdated code:
-	// https://supabase.com/docs/guides/auth/auth-helpers/nextjs?language=ts#server-components
+import AppLogo from "../components/nav/logo";
+import NavButton from "../components/nav/NavButton";
+import CatalogPage from "./catalog/page.tsx";
 
-	// Give this server component access to cookies
+import {
+	Card,
+	Grid,
+	Title,
+	Text,
+	Tab,
+	TabList,
+	TabGroup,
+	TabPanel,
+	TabPanels,
+} from "@tremor/react";
+
+// This is the main overview page after logging in
+export default async function DashboardPage({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	// Give this server component access to user's cookies
 	const supabase = createServerComponentClient({ cookies });
 
-	// Check if user is logged in
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();
-	if (!session) {
-		redirect("/unauthenticated");
-	}
-
+	// Execute all data to be passed to props here:
 	// TODO: Fetch catalog data from Supabase and pass to corresponding component to render
 	// TODO: Fetch customer data from Supabase and pass to corresponding component to render
+	{
+		/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */
+	}
+	{
+		/* <CatalogPage children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */
+	}
 	// TODO?: Fetch past email campaigns data from Supabase and pass to corresponding component to render
-	// I still need to add catalog test data to Supabase to test this connection
-	const { data } = await supabase.from("catalog").select();
 
 	// Testing: Pretty print result
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
 
-	// TODO: Render corresponding components
-	// TODO: Layout.tsx to place components using Tremor UI
 	return (
-		<>
-			<Link
-				href="/"
-				className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-				>
-					<polyline points="15 18 9 12 15 6" />
-				</svg>{" "}
-				Back
-			</Link>
-			<h1 className="text-foreground text-2xl font-bold mb-4">
-				You have successfully logged in.
-				<br /> Welcome to your dashboard page.
-			</h1>
-		</>
+		// Main is everything except the header and the footer
+		<main>
+			<AppLogo width={250} />
+			<NavButton buttonText="Back" />
+			<Title>Dashboard</Title>
+			<Text>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+			</Text>
+
+			<TabGroup className="mt-6">
+				<TabList>
+					<Tab>Overview</Tab>
+					<Tab>Orders</Tab>
+					<Tab>Customers</Tab>
+					<Tab>Catalog</Tab>
+					<Tab>Email Campaigns</Tab>
+				</TabList>
+				<TabPanels>
+					<TabPanel>
+						<Grid
+							numItemsMd={2}
+							numItemsLg={3}
+							className="gap-6 mt-6"
+						>
+	{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
+								<CatalogPage />
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-28" />
+							</Card>
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-28" />
+							</Card>
+						</Grid>
+						<div className="mt-6">
+							<Card>
+								<div className="h-80" />
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<div className="h-96" />
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<div className="h-96" />
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<CatalogPage>Catalog</CatalogPage>
+							</Card>
+						</div>
+					</TabPanel>
+					<TabPanel>
+						<div className="mt-6">
+							<Card>
+								<div className="h-96" />
+							</Card>
+						</div>
+					</TabPanel>
+				</TabPanels>
+			</TabGroup>
+		</main>
 	);
 }
