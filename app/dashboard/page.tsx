@@ -67,7 +67,7 @@ export default async function DashboardPage({
 						>
 							{/* Parallel routes allow for loading multiple routes at once */}
 							{/* https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#convention */}
-							<CatalogPage>Catalog</CatalogPage>
+								<CatalogPage />
 							<Card>
 								{/* Placeholder to set height */}
 								<div className="h-28" />

@@ -33,11 +33,7 @@ export async function catalogListing() {
 	}
 }
 
-export default async function CatalogPage({
-	children,
-}: {
-	children: ReactNode;
-}) {
+export default async function CatalogPage(){
 	const catalogData = await catalogListing();
 	let catalogArray: {
 		name: string;
