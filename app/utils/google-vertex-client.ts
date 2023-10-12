@@ -1,4 +1,4 @@
-const { DiscussServiceClient } = require("@google-ai/generativelanguage")
+const { TextServiceClient } = require("@google-ai/generativelanguage").v1beta2;
 
 const { GoogleAuth } = require('google-auth-library');
 
@@ -20,7 +20,7 @@ const clientOptions = {
 const API_KEY = process.env.PALM_API_KEY;
 export const googleClient = new EndpointServiceClient(clientOptions);
 export const predictionServiceClient = new PredictionServiceClient(clientOptions);
-export const googleTextClient = new DiscussServiceClient({
+export const googleTextClient = new TextServiceClient({
     authClient: new GoogleAuth().fromAPIKey(API_KEY),
 });
 
@@ -35,6 +35,7 @@ export async function authGoogle() {
     const res = await client.request({ url });
     console.log(res.data);
 }
+
 
 
 export async function createEndpoint() {
