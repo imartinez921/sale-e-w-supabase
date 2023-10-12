@@ -1,9 +1,10 @@
+import { exec } from "child_process";
 import { SupabaseClient } from "@supabase/supabase-js"
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/catalog_table.jsx";
-import { projectId, cloudLocation, endpointId, predictionServiceClient, instance, prediction, } from "../../utils/google-vertex-client";
+import { googleTextClient } from "../../utils/google-vertex-client";
 
 export const dynamic = "force-dynamic";
 
@@ -35,38 +36,20 @@ export async function catalogListing() {
 }
 
 // function to ask for customer discount
-async function askVertexAI(question: string) {
-	const endpoint = `projects/${projectId}/locations/${cloudLocation}/endpoints/${endpointId}`;
-
-	const instanceObj = new instance.TextSentimentPredictionInstance({
-		content: question,
-	});
-	const instanceVal = instanceObj.toValue();
-
-	const instances = [instanceVal]
-	const request = {
-		endpoint,
-		instances
-	};
+async function askPalmmAI(question: string) {
+	const MODEL_NAME = "models/chat-bison-001";
 
 	try {
-		const [response] = await predictionServiceClient.predict(request);
-
-		console.log('Predict text sentiment analysis response:');
-		console.log(`\tDeployed model id : ${response.deployedModelId}`);
-
-		console.log('\nPredictions :');
-		for (const predictionResultValue of response.predictions) {
-			const predictionResult =
-				prediction.TextSentimentPredictionResult.fromValue(
-					predictionResultValue
-				);
-			console.log(`\tSentiment measure: ${predictionResult.sentiment}`);
-		}
-
+		const result = await googleTextClient.generateMessage({
+			model: MODEL_NAME,
+			prompt: {
+				context: "This is asking to list customers and the items they are most likely to purchase n a catalog based on their purchasing history",
+				messages: [{ content: `${question}` }]
+			}
+		})
+		console.log(result)
 	} catch (error) {
-		console.error('Error making prediction:', error);
-		throw error;
+		console.log(error)
 	}
 }
 
@@ -106,7 +89,7 @@ export default async function CatalogPage({
 
 	const analysisRequest = `Using this array of customer data: ${customerData.data} and this array of catalog items: ${catalogArray}, Make a list out of the customers (using their email as their identity) purchasing habits from their most purchased items and what items they should purchase when those items are discounted based on what they purchase the most. Format the list as: phone number, most purchased: item, should buy when discounted:`
 
-	askVertexAI(analysisRequest)
+	askPalmmAI(analysisRequest)
 
 	return <CatalogTable data={catalogArray} />;
 }
