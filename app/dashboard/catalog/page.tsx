@@ -3,7 +3,7 @@ import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/catalog_table.jsx";
-import { cloudLocation, predictionServiceClient, instance, prediction, aiplatform } from "../../utils/google-vertex-client";
+import { cloudLocation, endpointId, predictionServiceClient, instance, prediction, } from "../../utils/google-vertex-client";
 
 export const dynamic = "force-dynamic";
 
@@ -36,7 +36,7 @@ export async function catalogListing() {
 
 // function to ask for customer discount
 async function askVertexAI(question: string) {
-	const endpoint = cloudLocation
+	const endpoint = endpointId
 
 	const instanceObj = new instance.TextSentimentPredictionInstance({
 		content: question,
@@ -55,6 +55,14 @@ async function askVertexAI(question: string) {
 		console.log('Predict text sentiment analysis response:');
 		console.log(`\tDeployed model id : ${response.deployedModelId}`);
 
+		console.log('\nPredictions :');
+		for (const predictionResultValue of response.predictions) {
+			const predictionResult =
+				prediction.TextSentimentPredictionResult.fromValue(
+					predictionResultValue
+				);
+			console.log(`\tSentiment measure: ${predictionResult.sentiment}`);
+		}
 
 	} catch (error) {
 		console.error('Error making prediction:', error);

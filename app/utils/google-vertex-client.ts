@@ -1,5 +1,8 @@
+const { GoogleAuth } = require('google-auth-library');
+
 export const projectId = process.env.CLOUD_PROJECT_ID
 export const cloudLocation = "us-central1"
+export const endpointId = process.env.VERTEX_ENDPOINT_ID
 
 export const aiplatform = require('@google-cloud/aiplatform');
 export const { instance, prediction } = aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
@@ -13,6 +16,18 @@ const clientOptions = {
 };
 export const googleClient = new EndpointServiceClient(clientOptions);
 export const predictionServiceClient = new PredictionServiceClient(clientOptions);
+
+export async function authGoogle() {
+    const auth = new GoogleAuth({
+        scopes: 'https://www.googleapis.com/auth/cloud-platform'
+    });
+    const client = await auth.getClient();
+    const projectId = await auth.getProjectId();
+    const url = `https://dns.googleapis.com/dns/v1/projects/${projectId}`;
+    const res = await client.request({ url });
+    console.log(res.data);
+}
+
 
 export async function createEndpoint() {
     // Configure the parent resource
@@ -63,4 +78,24 @@ export async function listGoogleEndpoints() {
             );
         }
     }
+}
+
+export async function deleteGoogleEndpoint() {
+    // Configure the parent resource
+    const endpoint = {
+        name: `projects/971349213959/locations/us-central1/endpoints/5187744349475045376`,
+    };
+
+    // NOTE: Be sure to undeploy any models deployed to the endpoint before
+    // attempting to delete the endpoint.
+
+    // Delete endpoint request
+    const [response] = await googleClient.deleteEndpoint(endpoint);
+    console.log(`Long running operation : ${response.name}`);
+
+    // Wait for operation to complete
+    await response.promise();
+    const result = response.result;
+
+    console.log('Delete endpoint response:\n', result);
 }
