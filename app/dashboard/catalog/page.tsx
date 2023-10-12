@@ -59,5 +59,6 @@ export default async function CatalogPage() {
 			});
 		}
 	});
+
 	return <CatalogTable data={catalogArray} />;
 }

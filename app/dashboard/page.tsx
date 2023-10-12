@@ -3,7 +3,8 @@ import { cookies } from "next/headers";
 
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
-import CatalogPage from "./catalog/page.tsx";
+import CatalogPage from "./catalog/page";
+
 
 import {
 	Card,
@@ -40,6 +41,10 @@ export default async function DashboardPage({
 	// Testing: Pretty print result
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
 
+	// listEndpoints();
+
+
+
 	return (
 		// Main is everything except the header and the footer
 		<main>
@@ -65,8 +70,8 @@ export default async function DashboardPage({
 							numItemsLg={3}
 							className="gap-6 mt-6"
 						>
-	{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
-								<CatalogPage />
+							{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
+							<CatalogPage />
 							<Card>
 								{/* Placeholder to set height */}
 								<div className="h-28" />
@@ -99,7 +104,7 @@ export default async function DashboardPage({
 					<TabPanel>
 						<div className="mt-6">
 							<Card>
-								<CatalogPage>Catalog</CatalogPage>
+								<CatalogPage />
 							</Card>
 						</div>
 					</TabPanel>
