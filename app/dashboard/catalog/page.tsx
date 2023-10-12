@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
-import { NextApiRequest, NextApiResponse } from "next";
+import { SupabaseClient } from "@supabase/supabase-js"
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/catalog_table.jsx";
-import { cloudLocation, googleClient } from "../../utils/google-vertex-client";
+import { cloudLocation, predictionServiceClient, instance, prediction, aiplatform } from "../../utils/google-vertex-client";
+
 export const dynamic = "force-dynamic";
 
 // Uploads items from sample catalog data to Square
@@ -35,36 +35,39 @@ export async function catalogListing() {
 }
 
 // function to ask for customer discount
-async function askForCustomerDiscounts(req: NextApiRequest, res: NextApiResponse) {
-	if (req.method !== 'POST') {
-		return res.status(405).end();
-	}
+async function askVertexAI(question: string) {
+	const endpoint = cloudLocation
 
-	const { question } = req.body;
+	const instanceObj = new instance.TextSentimentPredictionInstance({
+		content: question,
+	});
+	const instanceVal = instanceObj.toValue();
 
-	if (!question) {
-		return res.status(400).json({ error: 'Question is required.' });
-	}
+	const instances = [instanceVal]
+	const request = {
+		endpoint,
+		instances
+	};
 
 	try {
-		const endpoint = cloudLocation // Replace with your Vertex AI endpoint
-		const request = {
-			endpoint,
-			instances: [{ content: question }],
-		};
+		const [response] = await predictionServiceClient.predict(request);
 
-		const [response] = await googleClient.predict(request);
-		const answer = response.predictions[0]?.content;
+		console.log('Predict text sentiment analysis response:');
+		console.log(`\tDeployed model id : ${response.deployedModelId}`);
 
-		console.log(res.json({ answer }))
 
-		return res.json({ answer });
-	} catch (error: any) {
-		return res.status(500).json({ error: error.message });
+	} catch (error) {
+		console.error('Error making prediction:', error);
+		throw error;
 	}
 }
 
-export default async function CatalogPage() {
+
+export default async function CatalogPage({
+	supabase,
+}: {
+	supabase: SupabaseClient
+}) {
 	const catalogData = await catalogListing();
 	let catalogArray: {
 		name: string;
@@ -90,6 +93,12 @@ export default async function CatalogPage() {
 			});
 		}
 	});
+
+	let customerData = await supabase.from('customers').select('*')
+
+	const analysisRequest = `Using this array of customer data: ${customerData.data} and this array of catalog items: ${catalogArray}, Make a list out of the customers (using their email as their identity) purchasing habits from their most purchased items and what items they should purchase when those items are discounted based on what they purchase the most. Format the list as: phone number, most purchased: item, should buy when discounted:`
+
+	// askVertexAI(analysisRequest)
 
 	return <CatalogTable data={catalogArray} />;
 }

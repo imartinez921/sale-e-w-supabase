@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
 import CatalogPage from "./catalog/page";
+import CustomerServerComponent from "./customers/page";
+import { createEndpoint } from "../utils/google-vertex-client";
 
 
 import {
@@ -41,6 +43,7 @@ export default async function DashboardPage({
 	// Testing: Pretty print result
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
 
+	createEndpoint();
 	// listEndpoints();
 
 
@@ -71,7 +74,6 @@ export default async function DashboardPage({
 							className="gap-6 mt-6"
 						>
 							{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
-							<CatalogPage />
 							<Card>
 								{/* Placeholder to set height */}
 								<div className="h-28" />
@@ -98,13 +100,14 @@ export default async function DashboardPage({
 						<div className="mt-6">
 							<Card>
 								<div className="h-96" />
+								{/* <CustomerServerComponent supabase={supabase} /> */}
 							</Card>
 						</div>
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
 							<Card>
-								<CatalogPage />
+								<CatalogPage supabase={supabase} />
 							</Card>
 						</div>
 					</TabPanel>
