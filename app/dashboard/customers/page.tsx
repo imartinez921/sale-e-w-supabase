@@ -43,6 +43,7 @@ export default async function CustomerServerComponent({
 
   // customerList?.customers?.forEach(async customer => {
   //   const { data, error } = await supabase.from('customers').insert([{
+  //     email: customer?.emailAddress,
   //     tele_number: customer?.phoneNumber,
   //     purchases: {
   //       tea: Math.round(Math.random() * 100),
