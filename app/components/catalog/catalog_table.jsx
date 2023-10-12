@@ -13,7 +13,6 @@ import {
 } from "@tremor/react";
 
 export default function CatalogTable({ data }) {
-	console.log("CATALOG TABLE DATA",data)
 	return (
 		<Card>
 			<Title>Your Catalog</Title>

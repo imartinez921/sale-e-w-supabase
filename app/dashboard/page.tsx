@@ -1,9 +1,11 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { NextApiRequest, NextApiResponse } from "next";
 
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
 import CatalogPage from "./catalog/page";
+import { cloudLocation, googleClient, listGoogleEndpoints } from "../utils/google-vertex-cllient";
 
 
 import {
@@ -18,6 +20,34 @@ import {
 	TabPanels,
 } from "@tremor/react";
 
+
+async function askForCustomerDiscounts(req: NextApiRequest, res: NextApiResponse) {
+	if (req.method !== 'POST') {
+		return res.status(405).end();
+	}
+
+	const { question } = req.body;
+
+	if (!question) {
+		return res.status(400).json({ error: 'Question is required.' });
+	}
+
+	try {
+		const endpoint = cloudLocation // Replace with your Vertex AI endpoint
+		const request = {
+			endpoint,
+			instances: [{ content: question }],
+		};
+
+		const [response] = await googleClient.predict(request);
+		const answer = response.predictions[0]?.content;
+
+		return res.json({ answer });
+	} catch (error: any) {
+		return res.status(500).json({ error: error.message });
+	}
+}
+
 // This is the main overview page after logging in
 export default async function DashboardPage({
 	children,
@@ -26,6 +56,9 @@ export default async function DashboardPage({
 }) {
 	// Give this server component access to user's cookies
 	const supabase = createServerComponentClient({ cookies });
+
+	listGoogleEndpoints()
+
 
 	// Execute all data to be passed to props here:
 	// TODO: Fetch catalog data from Supabase and pass to corresponding component to render
