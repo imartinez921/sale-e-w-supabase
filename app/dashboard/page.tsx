@@ -1,11 +1,10 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
 import CatalogPage from "./catalog/page";
 import CustomerServerComponent from "./customers/page";
-import { createEndpoint } from "../utils/google-vertex-client";
+import { authGoogle, createEndpoint, listGoogleEndpoints } from "../utils/google-vertex-client";
 
 
 import {
@@ -43,8 +42,10 @@ export default async function DashboardPage({
 	// Testing: Pretty print result
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
 
-	createEndpoint();
-	// listEndpoints();
+	authGoogle().catch(console.error)
+
+	// createEndpoint();
+	// listGoogleEndpoints();
 
 
 
