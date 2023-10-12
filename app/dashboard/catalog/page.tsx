@@ -3,7 +3,7 @@ import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/catalog_table.jsx";
-import { cloudLocation, endpointId, predictionServiceClient, instance, prediction, } from "../../utils/google-vertex-client";
+import { projectId, cloudLocation, endpointId, predictionServiceClient, instance, prediction, } from "../../utils/google-vertex-client";
 
 export const dynamic = "force-dynamic";
 
@@ -36,7 +36,7 @@ export async function catalogListing() {
 
 // function to ask for customer discount
 async function askVertexAI(question: string) {
-	const endpoint = endpointId
+	const endpoint = `projects/${projectId}/locations/${cloudLocation}/endpoints/${endpointId}`;
 
 	const instanceObj = new instance.TextSentimentPredictionInstance({
 		content: question,
@@ -106,7 +106,7 @@ export default async function CatalogPage({
 
 	const analysisRequest = `Using this array of customer data: ${customerData.data} and this array of catalog items: ${catalogArray}, Make a list out of the customers (using their email as their identity) purchasing habits from their most purchased items and what items they should purchase when those items are discounted based on what they purchase the most. Format the list as: phone number, most purchased: item, should buy when discounted:`
 
-	// askVertexAI(analysisRequest)
+	askVertexAI(analysisRequest)
 
 	return <CatalogTable data={catalogArray} />;
 }
