@@ -1,3 +1,5 @@
+const { DiscussServiceClient } = require("@google-ai/generativelanguage")
+
 const { GoogleAuth } = require('google-auth-library');
 
 export const projectId = process.env.CLOUD_PROJECT_ID
@@ -14,8 +16,14 @@ const { EndpointServiceClient } = require('@google-cloud/aiplatform');
 const clientOptions = {
     apiEndpoint: 'us-central1-aiplatform.googleapis.com',
 };
+
+const API_KEY = process.env.PALM_API_KEY;
 export const googleClient = new EndpointServiceClient(clientOptions);
 export const predictionServiceClient = new PredictionServiceClient(clientOptions);
+export const googleTextClient = new DiscussServiceClient({
+    authClient: new GoogleAuth().fromAPIKey(API_KEY),
+});
+
 
 export async function authGoogle() {
     const auth = new GoogleAuth({
@@ -78,24 +86,4 @@ export async function listGoogleEndpoints() {
             );
         }
     }
-}
-
-export async function deleteGoogleEndpoint() {
-    // Configure the parent resource
-    const endpoint = {
-        name: `projects/971349213959/locations/us-central1/endpoints/5187744349475045376`,
-    };
-
-    // NOTE: Be sure to undeploy any models deployed to the endpoint before
-    // attempting to delete the endpoint.
-
-    // Delete endpoint request
-    const [response] = await googleClient.deleteEndpoint(endpoint);
-    console.log(`Long running operation : ${response.name}`);
-
-    // Wait for operation to complete
-    await response.promise();
-    const result = response.result;
-
-    console.log('Delete endpoint response:\n', result);
 }
