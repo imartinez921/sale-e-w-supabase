@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
+import { NextApiRequest, NextApiResponse } from "next";
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/catalog_table.jsx";
-
+import { cloudLocation, googleClient } from "../../utils/google-vertex-client";
 export const dynamic = "force-dynamic";
 
 // Uploads items from sample catalog data to Square
@@ -30,6 +31,36 @@ export async function catalogListing() {
 		return response.result;
 	} catch (error) {
 		console.log(error);
+	}
+}
+
+// function to ask for customer discount
+async function askForCustomerDiscounts(req: NextApiRequest, res: NextApiResponse) {
+	if (req.method !== 'POST') {
+		return res.status(405).end();
+	}
+
+	const { question } = req.body;
+
+	if (!question) {
+		return res.status(400).json({ error: 'Question is required.' });
+	}
+
+	try {
+		const endpoint = cloudLocation // Replace with your Vertex AI endpoint
+		const request = {
+			endpoint,
+			instances: [{ content: question }],
+		};
+
+		const [response] = await googleClient.predict(request);
+		const answer = response.predictions[0]?.content;
+
+		console.log(res.json({ answer }))
+
+		return res.json({ answer });
+	} catch (error: any) {
+		return res.status(500).json({ error: error.message });
 	}
 }
 
