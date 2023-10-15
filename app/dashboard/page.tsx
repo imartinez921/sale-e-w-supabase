@@ -28,14 +28,6 @@ export default async function DashboardPage({
 	const supabase = createServerComponentClient({ cookies });
 
 	// Execute all data to be passed to props here:
-	// TODO: Fetch catalog data from Supabase and pass to corresponding component to render
-	// TODO: Fetch customer data from Supabase and pass to corresponding component to render
-	{
-		/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */
-	}
-	{
-		/* <CatalogPage children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */
-	}
 	// TODO?: Fetch past email campaigns data from Supabase and pass to corresponding component to render
 
 	// Testing: Pretty print result
