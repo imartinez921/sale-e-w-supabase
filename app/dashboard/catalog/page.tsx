@@ -43,8 +43,6 @@ async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
 		purchases: {}
 	}[] = []
 
-	// console.log(catalogItem)
-
 	customerInfoList?.forEach(customer => {
 
 		const customerData = {
@@ -65,7 +63,7 @@ async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
 
 	let customersStringed = customerStringedArray.toString()
 
-	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses as an array`
+	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses`
 	// let messages = [{ content: promptString }]
 
 	// console.log(messages)
@@ -94,16 +92,32 @@ async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
 			},
 		})
 
-		console.log(result[0]?.candidates[0]?.output);
 		if (result[0]?.candidates[0]?.output === undefined) {
 			console.log("No customers buy that item enough");
 		} else {
+			const res = result[0]?.candidates[0]?.output?.split("\n")
+			let customer_emails: any = {
 
+			}
+			res.forEach((customer: string) => {
+				if (!(customer in customer_emails)) {
+					customer_emails[customer] = customer
+				}
+			}
+			)
+
+			const campaign = {
+				catalog_item: catalogItem,
+				emails: customer_emails
+			}
+
+			return campaign
 		}
 	} catch (error) {
 		console.log("No customers buy that item enough");
 	}
 }
+
 
 
 export default async function CatalogPage({

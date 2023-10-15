@@ -12,8 +12,10 @@ import {
 	Badge,
 	Button
 } from "@tremor/react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function CatalogTable({ data, palmAI, customerData }) {
+	const supabaseClient = createClientComponentClient()
 
 	return (
 		<Card>
@@ -37,8 +39,12 @@ export default function CatalogTable({ data, palmAI, customerData }) {
 								<Text>{item.price}</Text>
 							</TableCell>
 							<TableCell>
-								<Button onClick={() => {
-									palmAI(customerData?.data, item.name)
+								<Button onClick={async () => {
+									const campaign = await palmAI(customerData?.data, item.name)
+
+									const { data, error } = await supabaseClient.from('email_campaigns').insert([
+										campaign,
+									]).select()
 								}}>Create Sale Campaign</Button>
 							</TableCell>
 						</TableRow>
