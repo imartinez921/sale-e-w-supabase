@@ -35,22 +35,40 @@ export async function catalogListing() {
 }
 
 // function to ask for customer discount
-async function askPalmmAI(customerInfoList: any[] | null, catalogItem: any) {
+async function askPalmmAI(customerInfoList: any[] | null, catalogItem: string) {
 	"use server"
 	const MODEL_NAME = "models/text-bison-001";
-	const customerEmails: {
-		email: string
+	const customersData: {
+		email: string,
+		purchases: {}
 	}[] = []
 
-	customerInfoList?.forEach((customer: { email: any; }) => {
-		customerEmails.push(customer.email)
+	// console.log(catalogItem)
+
+	customerInfoList?.forEach(customer => {
+
+		const customerData = {
+			email: customer?.email,
+			purchases: customer?.purchases
+		}
+
+		customersData.push(customerData)
 	})
 
-	// console.log(customerEmails)
+	let customerStringedArray: any[] = []
 
-	const promptString = `Using this array of customer data: ${customerInfoList} and this catalog items: ${catalogItem}. Find out which top three items each customer purchases the most. Then if that item is one of those top three items, list the customers email if it's found in ${customerEmails}`
+	customersData.forEach(customer => {
+		let stringed = JSON.stringify(customer)
 
-	// console.log(customerInfoList)
+		customerStringedArray.push(stringed)
+	})
+
+	let customersStringed = customerStringedArray.toString()
+
+	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses`
+	// let messages = [{ content: promptString }]
+
+	// console.log(messages)
 
 	try {
 		const stopSequences: any = [];
@@ -58,7 +76,7 @@ async function askPalmmAI(customerInfoList: any[] | null, catalogItem: any) {
 			// required, which model to use to generate the result
 			model: MODEL_NAME,
 			// optional, 0.0 always uses the highest-probability result
-			temperature: 0.7,
+			temperature: 0.0,
 			// optional, how many candidate results to generate
 			candidateCount: 1,
 			// optional, number of most probable tokens to consider for generation
@@ -66,19 +84,23 @@ async function askPalmmAI(customerInfoList: any[] | null, catalogItem: any) {
 			// optional, for nucleus sampling decoding strategy
 			top_p: 0.95,
 			// optional, maximum number of output tokens to generate
-			max_output_tokens: 1024,
+			max_output_tokens: 100,
 			// optional, sequences at which to stop model generation
 			stop_sequences: stopSequences,
 			// optional, safety settings
 			// safety_settings: [{ "category": "HARM_CATEGORY_DEROGATORY", "threshold": 1 }, { "category": "HARM_CATEGORY_TOXICITY", "threshold": 1 }, { "category": "HARM_CATEGORY_VIOLENCE", "threshold": 2 }, { "category": "HARM_CATEGORY_SEXUAL", "threshold": 2 }, { "category": "HARM_CATEGORY_MEDICAL", "threshold": 2 }, { "category": "HARM_CATEGORY_DANGEROUS", "threshold": 2 }],
 			prompt: {
-				text: promptString,
+				text: promptString
 			},
 		})
 
 		console.log(result[0]?.candidates[0]?.output);
+		// console.log(result);
+		if (result[0]?.candidates[0]?.output === undefined) {
+			console.log("No customers buy that item enough");
+		}
 	} catch (error) {
-		console.log(error)
+		console.log("No customers buy that item enough");
 	}
 }
 

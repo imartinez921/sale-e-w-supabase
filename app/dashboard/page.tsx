@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
 import CatalogPage from "./catalog/page";
-
+// import CustomerServerComponent from "./customers/page";
 
 
 import {
@@ -98,7 +98,6 @@ export default async function DashboardPage({
 						<div className="mt-6">
 							<Card>
 								<div className="h-96" />
-								{/* <CustomerServerComponent supabase={supabase} /> */}
 							</Card>
 						</div>
 					</TabPanel>

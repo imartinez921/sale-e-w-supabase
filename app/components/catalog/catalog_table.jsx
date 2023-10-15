@@ -10,9 +10,11 @@ import {
 	Text,
 	Title,
 	Badge,
+	Button
 } from "@tremor/react";
 
 export default function CatalogTable({ data, palmAI, customerData }) {
+
 	return (
 		<Card>
 			<Title>Your Catalog</Title>
@@ -33,6 +35,11 @@ export default function CatalogTable({ data, palmAI, customerData }) {
 							</TableCell>
 							<TableCell>
 								<Text>{item.price}</Text>
+							</TableCell>
+							<TableCell>
+								<Button onClick={() => {
+									palmAI(customerData?.data, item.name)
+								}}>Create Sale Campaign</Button>
 							</TableCell>
 						</TableRow>
 					))}
