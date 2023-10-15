@@ -96,24 +96,24 @@ async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
 			console.log("No customers buy that item enough");
 		} else {
 			const res = result[0]?.candidates[0]?.output?.split("\n")
-			let customer_emails: any = {
-
-			}
+			let customer_emails: any[] = []
 			res.forEach((customer: string) => {
-				if (!(customer in customer_emails)) {
-					customer_emails[customer] = customer
-				}
+				// if (!(customer in customer_emails)) {
+				// 	customer_emails[customer] = customer
+				// }
+				customer_emails.push(customer)
 			}
 			)
 
 			const campaign = {
 				catalog_item: catalogItem,
-				emails: customer_emails
+				emails: customer_emails.toString()
 			}
 
 			return campaign
 		}
 	} catch (error) {
+		console.log(error)
 		console.log("No customers buy that item enough");
 	}
 }
