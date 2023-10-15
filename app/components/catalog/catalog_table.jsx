@@ -12,7 +12,7 @@ import {
 	Badge,
 } from "@tremor/react";
 
-export default function CatalogTable({ data }) {
+export default function CatalogTable({ data, palmAI, customerData }) {
 	return (
 		<Card>
 			<Title>Your Catalog</Title>
