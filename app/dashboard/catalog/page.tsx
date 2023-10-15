@@ -1,4 +1,3 @@
-import { exec } from "child_process";
 import { SupabaseClient } from "@supabase/supabase-js"
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
@@ -36,17 +35,20 @@ export async function catalogListing() {
 }
 
 // function to ask for customer discount
-async function askPalmmAI(customerInfoList: any, catalog: any) {
+async function askPalmmAI(customerInfoList: any[] | null, catalogItem: any) {
+	"use server"
 	const MODEL_NAME = "models/text-bison-001";
-	const customerEmails: any = []
+	const customerEmails: {
+		email: string
+	}[] = []
 
-	customerInfoList.forEach((customer: { email: any; }) => {
+	customerInfoList?.forEach((customer: { email: any; }) => {
 		customerEmails.push(customer.email)
 	})
 
 	// console.log(customerEmails)
 
-	const promptString = `Using this array of customer data: ${customerInfoList} and this array of catalog items: ${catalog}. Find out which items each customer purchases the most, then suggest items from the catalog they should buy from the catalog based on what they purchase the most of. List the customers by their email that is found in ${customerEmails}`
+	const promptString = `Using this array of customer data: ${customerInfoList} and this catalog items: ${catalogItem}. Find out which top three items each customer purchases the most. Then if that item is one of those top three items, list the customers email if it's found in ${customerEmails}`
 
 	// console.log(customerInfoList)
 
@@ -114,9 +116,5 @@ export default async function CatalogPage({
 
 	let customerData = await supabase.from('customers').select('*')
 
-
-
-	askPalmmAI(customerData?.data, catalogArray);
-
-	return <CatalogTable data={catalogArray} />;
+	return <CatalogTable data={catalogArray} palmAI={askPalmmAI} customerData={customerData} />;
 }

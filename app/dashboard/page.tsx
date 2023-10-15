@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
 import CatalogPage from "./catalog/page";
-import CustomerServerComponent from "./customers/page";
+
 
 
 import {
