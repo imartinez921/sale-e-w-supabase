@@ -34,8 +34,8 @@ export async function catalogListing() {
 	}
 }
 
-// function to ask for customer discount
-async function askPalmmAI(customerInfoList: any[] | null, catalogItem: string) {
+// function to get an array of emails for the item you put on sale
+async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
 	"use server"
 	const MODEL_NAME = "models/text-bison-001";
 	const customersData: {
@@ -65,7 +65,7 @@ async function askPalmmAI(customerInfoList: any[] | null, catalogItem: string) {
 
 	let customersStringed = customerStringedArray.toString()
 
-	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses`
+	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses as an array`
 	// let messages = [{ content: promptString }]
 
 	// console.log(messages)
@@ -95,9 +95,10 @@ async function askPalmmAI(customerInfoList: any[] | null, catalogItem: string) {
 		})
 
 		console.log(result[0]?.candidates[0]?.output);
-		// console.log(result);
 		if (result[0]?.candidates[0]?.output === undefined) {
 			console.log("No customers buy that item enough");
+		} else {
+
 		}
 	} catch (error) {
 		console.log("No customers buy that item enough");
@@ -138,5 +139,5 @@ export default async function CatalogPage({
 
 	let customerData = await supabase.from('customers').select('*')
 
-	return <CatalogTable data={catalogArray} palmAI={askPalmmAI} customerData={customerData} />;
+	return <CatalogTable data={catalogArray} palmAI={askPalmAI} customerData={customerData} />;
 }
