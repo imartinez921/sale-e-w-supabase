@@ -2,8 +2,8 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
-import CatalogPage from "./catalog/page";
-import EmailCampaignsPage from "./recommendations/page";
+import CatalogTab from "./catalog/catalog-tab";
+import EmailCampaignsTab from "./recommendations/email-campaigns-tab";
 
 
 import {
@@ -96,14 +96,14 @@ export default async function DashboardPage({
 					<TabPanel>
 						<div className="mt-6">
 							<Card>
-								<CatalogPage supabase={supabase} />
+								<CatalogTab supabase={supabase} />
 							</Card>
 						</div>
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
 							<Card>
-								<EmailCampaignsPage supabase={supabase} />
+								<EmailCampaignsTab supabase={supabase} />
 							</Card>
 						</div>
 					</TabPanel>
