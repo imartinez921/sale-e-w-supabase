@@ -16,7 +16,6 @@ import {
 } from "@tremor/react";
 
 export default function RecommendationsTable({ data }) {
-    console.log(data)
     return (
         <Card>
             <Title>Your Email Campaigns</Title>
@@ -30,7 +29,6 @@ export default function RecommendationsTable({ data }) {
                 <TableBody>
                     {data?.map((campaign) => {
                         const campaignKey = crypto.randomUUID();
-                        console.log(campaign)
                         return (
 							<TableRow key={campaignKey}>
 								<TableCell>{campaign.catalog_item}</TableCell>

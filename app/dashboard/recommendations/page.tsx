@@ -17,7 +17,6 @@ export default async function EmailCampaignsPage({
 	let campaignInfo = await supabase.from('email_campaigns').select('*')
 
 	campaignInfo?.data?.map(campaign => {
-		console.log(campaign);
 		const campaignObject = {
 			id: campaign?.id,
 			catalog_item: campaign?.catalog_item,
@@ -26,6 +25,5 @@ export default async function EmailCampaignsPage({
 		campaignArray.push(campaignObject)
 	})
 
-	// console.log(campaignArray)
 	return <RecommendationsTable data={campaignArray} />
 }

@@ -30,7 +30,6 @@ export async function GET(request: Request) {
 		password,
 	});
 	console.log("SUPABASE RESPONSE", printThis);
-	console.log("grab user:", printThis.data.session.user);
 
 	// return NextResponse.redirect(requestUrl.origin, {
 	// 	// Redirects from a POST to a GET route
