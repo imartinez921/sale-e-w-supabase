@@ -2,7 +2,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
-import CatalogTable from "../../components/catalog/catalog_table.jsx";
+import CatalogTable from "../../components/catalog/catalog_table";
 import { googleTextClient } from "../../utils/google-vertex-client";
 
 export const dynamic = "force-dynamic";
@@ -116,7 +116,7 @@ async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
 	}
 }
 
-export default async function CatalogPage({
+export default async function CatalogTab({
 	supabase,
 }: {
 	supabase: SupabaseClient;
