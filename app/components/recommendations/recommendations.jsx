@@ -9,6 +9,8 @@ import {
     TableCell,
     Text,
     Title,
+    List,
+    ListItem,
     Badge,
     Button
 } from "@tremor/react";
@@ -29,7 +31,9 @@ export default function RecommendationsTable({ data }) {
                         <TableRow key={item.id}>
                             <TableCell>{item.catalog_item}</TableCell>
                             <TableCell>
-                                <Text>{item.emails.map(email => <Text>{email}</Text>)}</Text>
+                                <List>
+                                    {item.emails.map(email => <ListItem>{email}</ListItem>)}
+                                </List>
                             </TableCell>
                         </TableRow>
                     ))}
