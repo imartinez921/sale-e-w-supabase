@@ -16,6 +16,7 @@ import {
 } from "@tremor/react";
 
 export default function RecommendationsTable({ data }) {
+    console.log(data)
     return (
         <Card>
             <Title>Your Email Campaigns</Title>
@@ -27,16 +28,21 @@ export default function RecommendationsTable({ data }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data?.map((item) => (
-                        <TableRow key={item.id}>
-                            <TableCell>{item.catalog_item}</TableCell>
-                            <TableCell>
-                                <List>
-                                    {item.emails.map(email => <ListItem>{email}</ListItem>)}
-                                </List>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {data?.map((campaign) => {
+                        const campaignKey = crypto.randomUUID();
+                        console.log(campaign)
+                        return (
+							<TableRow key={campaignKey}>
+								<TableCell>{campaign.catalog_item}</TableCell>
+								<TableCell>
+									<List>
+										{campaign.emails.map((email, index) => (
+											<ListItem key={`${email}+"-"+${index}`}>{email}</ListItem>
+										))}
+									</List>
+								</TableCell>
+							</TableRow>
+						);})}
                 </TableBody>
             </Table>
         </Card>

@@ -17,7 +17,9 @@ export default async function EmailCampaignsPage({
 	let campaignInfo = await supabase.from('email_campaigns').select('*')
 
 	campaignInfo?.data?.map(campaign => {
+		console.log(campaign);
 		const campaignObject = {
+			id: campaign?.id,
 			catalog_item: campaign?.catalog_item,
 			emails: campaign?.emails.split(",")
 		}
