@@ -3,7 +3,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import RecommendationsTable from "../../components/recommendations/recommendations"
 
 
-export default async function EmailCampaignsPage({
+export default async function EmailCampaignsTab({
 	supabase,
 }: {
 	supabase: SupabaseClient
