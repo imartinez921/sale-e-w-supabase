@@ -12,7 +12,6 @@ import {
 	TabPanels,
 } from "@tremor/react";
 
-import CatalogPage from "./catalog/page.tsx";
 import NavButton from "../components/nav/NavButton";
 import Link from "next/link";
 import AppLogo from "../components/nav/logo";
