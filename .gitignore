@@ -32,7 +32,7 @@ yarn-error.log*
 .vercel
 
 # vertex
-vertex-credsx.json
+vertex-creds.json
 
 # typescript
 *.tsbuildinfo

@@ -1,8 +1,9 @@
-import { ReactNode } from "react";
+import { SupabaseClient } from "@supabase/supabase-js"
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/catalog_table.jsx";
+import { googleTextClient } from "../../utils/google-vertex-client";
 
 export const dynamic = "force-dynamic";
 
@@ -33,7 +34,97 @@ export async function catalogListing() {
 	}
 }
 
-export default async function CatalogPage() {
+// function to get an array of emails for the item you put on sale
+async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
+	"use server"
+	const MODEL_NAME = "models/text-bison-001";
+	const customersData: {
+		email: string,
+		purchases: {}
+	}[] = []
+
+	customerInfoList?.forEach(customer => {
+
+		const customerData = {
+			email: customer?.email,
+			purchases: customer?.purchases
+		}
+
+		customersData.push(customerData)
+	})
+
+	let customerStringedArray: any[] = []
+
+	customersData.forEach(customer => {
+		let stringed = JSON.stringify(customer)
+
+		customerStringedArray.push(stringed)
+	})
+
+	let customersStringed = customerStringedArray.toString()
+
+	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses`
+	// let messages = [{ content: promptString }]
+
+	// console.log(messages)
+
+	try {
+		const stopSequences: any = [];
+		const result = await googleTextClient.generateText({
+			// required, which model to use to generate the result
+			model: MODEL_NAME,
+			// optional, 0.0 always uses the highest-probability result
+			temperature: 0.0,
+			// optional, how many candidate results to generate
+			candidateCount: 1,
+			// optional, number of most probable tokens to consider for generation
+			top_k: 40,
+			// optional, for nucleus sampling decoding strategy
+			top_p: 0.95,
+			// optional, maximum number of output tokens to generate
+			max_output_tokens: 100,
+			// optional, sequences at which to stop model generation
+			stop_sequences: stopSequences,
+			// optional, safety settings
+			// safety_settings: [{ "category": "HARM_CATEGORY_DEROGATORY", "threshold": 1 }, { "category": "HARM_CATEGORY_TOXICITY", "threshold": 1 }, { "category": "HARM_CATEGORY_VIOLENCE", "threshold": 2 }, { "category": "HARM_CATEGORY_SEXUAL", "threshold": 2 }, { "category": "HARM_CATEGORY_MEDICAL", "threshold": 2 }, { "category": "HARM_CATEGORY_DANGEROUS", "threshold": 2 }],
+			prompt: {
+				text: promptString
+			},
+		})
+
+		if (result[0]?.candidates[0]?.output === undefined) {
+			console.log("No customers buy that item enough");
+		} else {
+			const res = result[0]?.candidates[0]?.output?.split("\n")
+			let customer_emails: any[] = []
+			res.forEach((customer: string) => {
+				// if (!(customer in customer_emails)) {
+				// 	customer_emails[customer] = customer
+				// }
+				customer_emails.push(customer)
+			}
+			)
+
+			const campaign = {
+				catalog_item: catalogItem,
+				emails: customer_emails.toString()
+			}
+
+			return campaign
+		}
+	} catch (error) {
+		console.log(error)
+		console.log("No customers buy that item enough");
+	}
+}
+
+
+
+export default async function CatalogPage({
+	supabase,
+}: {
+	supabase: SupabaseClient
+}) {
 	const catalogData = await catalogListing();
 	let catalogArray: {
 		name: string;
@@ -59,5 +150,8 @@ export default async function CatalogPage() {
 			});
 		}
 	});
-	return <CatalogTable data={catalogArray} />;
+
+	let customerData = await supabase.from('customers').select('*')
+
+	return <CatalogTable data={catalogArray} palmAI={askPalmAI} customerData={customerData} />;
 }

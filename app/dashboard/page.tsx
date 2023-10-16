@@ -1,9 +1,10 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-
 import AppLogo from "../components/nav/logo";
 import NavButton from "../components/nav/NavButton";
-import CatalogPage from "./catalog/page.tsx";
+import CatalogPage from "./catalog/page";
+import EmailCampaignsPage from "./recommendations/page";
+
 
 import {
 	Card,
@@ -27,18 +28,15 @@ export default async function DashboardPage({
 	const supabase = createServerComponentClient({ cookies });
 
 	// Execute all data to be passed to props here:
-	// TODO: Fetch catalog data from Supabase and pass to corresponding component to render
-	// TODO: Fetch customer data from Supabase and pass to corresponding component to render
-	{
-		/* <CustomerServerComponent supabase={supabase} /> DO NOT UNCOMMENT THIS OR DATA WILL BE PUT IN SUPABASE WE NO LONGER NWWS */
-	}
-	{
-		/* <CatalogPage children={undefined} /> COMMENTED FOR SAME REASON AS ABOVE */
-	}
 	// TODO?: Fetch past email campaigns data from Supabase and pass to corresponding component to render
 
 	// Testing: Pretty print result
 	// return <pre>{JSON.stringify(data,null,2)}</pre>
+
+	// createEndpoint();
+	// listGoogleEndpoints();
+
+
 
 	return (
 		// Main is everything except the header and the footer
@@ -65,8 +63,7 @@ export default async function DashboardPage({
 							numItemsLg={3}
 							className="gap-6 mt-6"
 						>
-	{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
-								<CatalogPage />
+							{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
 							<Card>
 								{/* Placeholder to set height */}
 								<div className="h-28" />
@@ -99,14 +96,14 @@ export default async function DashboardPage({
 					<TabPanel>
 						<div className="mt-6">
 							<Card>
-								<CatalogPage>Catalog</CatalogPage>
+								<CatalogPage supabase={supabase} />
 							</Card>
 						</div>
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
 							<Card>
-								<div className="h-96" />
+								<EmailCampaignsPage supabase={supabase} />
 							</Card>
 						</div>
 					</TabPanel>

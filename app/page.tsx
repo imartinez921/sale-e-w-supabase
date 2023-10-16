@@ -1,6 +1,5 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-
 import AppLogo from "./components/nav/logo";
 import NavButton from "./components/nav/NavButton";
 import LoginButton from "./components/nav/LoginButton";
@@ -28,7 +27,7 @@ export default async function Index() {
 		<main>
 			<div className="animate-in">
 				<AppLogo
-				width={500} />
+					width={500} />
 				{session ? (
 					<>
 						<h1>Welcome, {email}</h1>
