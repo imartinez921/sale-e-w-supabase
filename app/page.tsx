@@ -31,7 +31,7 @@ export default async function Index() {
 	return (
 		<div className="flex flex-col items-center h-auto pt-52 pb-16">
 			<AppLogo width={500} />
-			<Title className="pt-8">The app that keeps your customers happy and your overstock low.</Title>
+			<Title className="pt-8">The app that keeps your customers happy and your Square overstock low.</Title>
 			{session ? (
 				<>
 					<h1>Welcome, {email}</h1>
