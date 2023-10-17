@@ -33,7 +33,7 @@ export default function NavButton({
 			<Button
 				icon={currPath === "/" ? ArrowRightIcon : ArrowLeftIcon}
 				size="xs"
-				variant="secondary"
+				variant="primary"
 				onClick={handleClick}
 			>
 				{buttonText}
