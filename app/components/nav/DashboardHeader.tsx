@@ -5,13 +5,15 @@ import { Subtitle } from "@tremor/react";
 import AvatarMini from "./AvatarMini";
 import NavButton from "./NavButton";
 import AppLogo from "./AppLogo";
+import LogoutButton from "./LogoutButton";
 
 export default function DashboardHeader() {
 	return (
 		<>
 			<header className="h-24 flex items-center justify-between">
-				<div className="box-border min-w-250 w-250 flex-none">
+				<div className="flex box-border min-w-250 w-250 flex-none gap-2">
 					<NavButton buttonText="Back" />
+					<LogoutButton />
 				</div>
 				<div className="box-border min-w-250 w-250 flex-initial">
 					<AppLogo width={250} />
