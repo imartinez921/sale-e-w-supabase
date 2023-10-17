@@ -7,5 +7,13 @@ interface AppLogoProps {
 }
 
 export default function AppLogo({ width = 150 }: AppLogoProps) {
-	return <Image priority src={logo} alt="SALE-E logo" width={width} />;
+	return (
+		<Image
+			priority
+			src={logo}
+			alt="SALE-E logo"
+			width={width}
+			className="box-border min-w-250"
+		/>
+	);
 }
