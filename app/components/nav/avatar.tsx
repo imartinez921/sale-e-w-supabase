@@ -8,17 +8,17 @@ interface AvatarProps {
 	socialUrl: string;
 }
 
-export default function Avatar ({ name, imageUrl, socialUrl }: AvatarProps) {
+export default function Avatar({ name, imageUrl, socialUrl }: AvatarProps) {
 	return (
-		<Card className="flex flex-col gap-2 justify-center items-center">
-			<Text>{name}</Text>
-			<a href={socialUrl}>
+		<a href={socialUrl}>
+			<Card className="flex flex-col gap-2 justify-center items-center">
+				<Text>{name}</Text>
 				<img
 					src={imageUrl}
 					alt={`"headshot of "+{name}`}
 					className="avatar-image"
 				/>
-			</a>
-		</Card>
+			</Card>
+		</a>
 	);
-};
+}
