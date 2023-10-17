@@ -1,9 +1,13 @@
+"use client";
+
+import { Button } from "@tremor/react";
+
 export default function LoginButton() {
 	return (
 		<form action="/auth/login" method="get">
-			<button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+			<Button size="xs" variant="secondary">
 				Click here to sign in as demo user
-			</button>
+			</Button>
 		</form>
 	);
 }
