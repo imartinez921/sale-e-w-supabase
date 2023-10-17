@@ -8,3 +8,11 @@
 body {
   margin: 15px;
 }
+
+.avatar-image {
+  @apply rounded-full h-36 w-36;
+}
+
+.avatar-text {
+  @apply flex gap-8 justify-center items-center;
+}
