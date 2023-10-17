@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { Divider } from "@tremor/react";
 import { Subtitle } from "@tremor/react";
 import AvatarMini from "./AvatarMini";

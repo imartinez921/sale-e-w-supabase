@@ -1,6 +1,6 @@
 "use client";
 
-import { Text, Card, Italic } from "@tremor/react";
+import { Text, Card } from "@tremor/react";
 
 interface AvatarProps {
 	name: string;

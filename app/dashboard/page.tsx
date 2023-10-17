@@ -7,7 +7,6 @@ import {
 	Card,
 	Grid,
 	Title,
-	Text,
 	Tab,
 	TabList,
 	TabGroup,
