@@ -35,7 +35,11 @@ export default function NavButton({
 				size="xs"
 				variant="primary"
 				onClick={handleClick}
-				className="min-w-250"
+				className={
+					currPath === "/"
+						? "animate-bounce"
+						: "min-w-250"
+				}
 			>
 				{buttonText}
 			</Button>
