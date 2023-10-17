@@ -3,6 +3,11 @@ import { useRouter, usePathname } from "next/navigation";
 
 import { Button } from "@tremor/react";
 
+import {
+	ArrowLeftIcon,
+	ArrowRightIcon,
+} from "@heroicons/react/outline";
+
 interface ButtonProps {
 	path?: string;
 	buttonText?: string;
@@ -25,7 +30,12 @@ export default function NavButton({
 
 	return (
 		<>
-			<Button size="xs" variant="secondary" onClick={handleClick}>
+			<Button
+				icon={currPath === "/" ? ArrowRightIcon : ArrowLeftIcon}
+				size="xs"
+				variant="secondary"
+				onClick={handleClick}
+			>
 				{buttonText}
 			</Button>
 		</>
