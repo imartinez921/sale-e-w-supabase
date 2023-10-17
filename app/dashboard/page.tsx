@@ -56,23 +56,15 @@ export default async function DashboardPage({
 							className="gap-6 mt-6"
 						>
 							{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
-							<Card className="h-64 overflow-y-scroll overflow-x-scroll">
+							<Card className="h-96 overflow-y-scroll overflow-x-scroll">
 								<CatalogTab supabase={supabase} />
 							</Card>
-							<Card>
-								{/* Placeholder to set height */}
-								<div className="h-48" />
-							</Card>
-							<Card>
-								{/* Placeholder to set height */}
-								<div className="h-48" />
-							</Card>
+							<Card className="h-96"></Card>
+							<Card className="h-96"></Card>
 						</Grid>
-						<div className="mt-6">
-							<Card>
-								<div className="h-80" />
-							</Card>
-						</div>
+						<Card className="h-96 mt-6 overflow-y-scroll overflow-x-scroll">
+							<EmailCampaignsTab supabase={supabase} />
+						</Card>
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
