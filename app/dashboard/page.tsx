@@ -39,9 +39,6 @@ export default async function DashboardPage({
 		// Main is everything except the header and the footer
 		<main>
 			<Title>Dashboard</Title>
-			<Text>
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
-			</Text>
 
 			<TabGroup className="mt-6 p-2">
 				<TabList>
