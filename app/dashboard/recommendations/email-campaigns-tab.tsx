@@ -1,6 +1,6 @@
 "use server"
 import { SupabaseClient } from "@supabase/supabase-js";
-import RecommendationsTable from "../../components/recommendations/recommendations"
+import CampaignsTable from "../../components/campaigns/CampaignsTable"
 
 
 export default async function EmailCampaignsTab({
@@ -25,5 +25,5 @@ export default async function EmailCampaignsTab({
 		campaignArray.push(campaignObject)
 	})
 
-	return <RecommendationsTable data={campaignArray} />
+	return <CampaignsTable data={campaignArray} />
 }

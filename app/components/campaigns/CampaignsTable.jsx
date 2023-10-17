@@ -15,7 +15,7 @@ import {
     Button
 } from "@tremor/react";
 
-export default function RecommendationsTable({ data }) {
+export default function CampaignsTable({ data }) {
     return (
 		<>
 			<Title>Your Email Campaigns</Title>
