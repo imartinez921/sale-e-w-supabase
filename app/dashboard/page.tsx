@@ -93,8 +93,8 @@ export default async function DashboardPage({
 							</Card>
 						</div>
 					</TabPanel>
-					<TabPanel>
-						<Card className="mt-6 h-96 overflow-y-scroll">
+					<TabPanel className="h-96">
+						<Card className="mt-6 h-full overflow-y-scroll">
 							<CatalogTab supabase={supabase} />
 						</Card>
 					</TabPanel>
