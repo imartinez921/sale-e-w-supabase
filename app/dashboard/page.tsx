@@ -41,7 +41,6 @@ export default async function DashboardPage({
 			<TabGroup className="mt-6 p-2">
 				<TabList>
 					<Tab>Overview</Tab>
-					<Tab>Orders</Tab>
 					<Tab>Customers</Tab>
 					<Tab>Catalog</Tab>
 					<Tab>Email Campaigns</Tab>
@@ -50,13 +49,12 @@ export default async function DashboardPage({
 					<TabPanel>
 						<Grid
 							numItemsMd={2}
-							numItemsLg={3}
+							numItemsLg={2}
 							className="gap-6 mt-6"
 						>
 							<Card className="h-96 overflow-y-scroll overflow-x-scroll">
 								<CatalogTab supabase={supabase} />
 							</Card>
-							<Card className="h-96"></Card>
 							<Card className="h-96 overflow-y-scroll overflow-x-scroll">
 								<CustomerTab supabase={supabase} />
 							</Card>
@@ -64,13 +62,6 @@ export default async function DashboardPage({
 						<Card className="h-96 mt-6 overflow-y-scroll overflow-x-scroll">
 							<EmailCampaignsTab supabase={supabase} />
 						</Card>
-					</TabPanel>
-					<TabPanel>
-						<div className="mt-6">
-							<Card>
-								<div className="h-96" />
-							</Card>
-						</div>
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
