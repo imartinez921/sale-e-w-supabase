@@ -5,7 +5,6 @@ import NavButton from "../components/nav/NavButton";
 import CatalogTab from "./catalog/catalog-tab";
 import EmailCampaignsTab from "./recommendations/email-campaigns-tab";
 
-
 import {
 	Card,
 	Grid,
@@ -36,8 +35,6 @@ export default async function DashboardPage({
 	// createEndpoint();
 	// listGoogleEndpoints();
 
-
-
 	return (
 		// Main is everything except the header and the footer
 		<main>
@@ -64,13 +61,16 @@ export default async function DashboardPage({
 							className="gap-6 mt-6"
 						>
 							{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
-							<Card>
-								{/* Placeholder to set height */}
-								<div className="h-28" />
+							<Card className="h-64 overflow-y-scroll">
+								<CatalogTab supabase={supabase} />
 							</Card>
 							<Card>
 								{/* Placeholder to set height */}
-								<div className="h-28" />
+								<div className="h-48" />
+							</Card>
+							<Card>
+								{/* Placeholder to set height */}
+								<div className="h-48" />
 							</Card>
 						</Grid>
 						<div className="mt-6">
@@ -94,11 +94,9 @@ export default async function DashboardPage({
 						</div>
 					</TabPanel>
 					<TabPanel>
-						<div className="mt-6">
-							<Card>
-								<CatalogTab supabase={supabase} />
-							</Card>
-						</div>
+						<Card className="mt-6 h-96 overflow-y-scroll">
+							<CatalogTab supabase={supabase} />
+						</Card>
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
