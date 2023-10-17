@@ -13,7 +13,7 @@ import {
 } from "@tremor/react";
 import Link from "next/link";
 
-import Header from "../components/nav/Header";
+import Header from "../components/nav/DashboardHeader";
 
 export const dynamic = "force-dynamic";
 
