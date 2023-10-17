@@ -97,7 +97,7 @@ export default async function DashboardPage({
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
-							<Card>
+							<Card className=" mt-6 h-full overflow-y-scroll">
 								<EmailCampaignsTab supabase={supabase} />
 							</Card>
 						</div>
