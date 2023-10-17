@@ -1,6 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import CatalogTab from "./catalog/catalog-tab";
+import CustomerTab from "./customers/customer-tab";
 import EmailCampaignsTab from "./recommendations/email-campaigns-tab";
 
 import {
@@ -52,12 +53,13 @@ export default async function DashboardPage({
 							numItemsLg={3}
 							className="gap-6 mt-6"
 						>
-							{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
 							<Card className="h-96 overflow-y-scroll overflow-x-scroll">
 								<CatalogTab supabase={supabase} />
 							</Card>
 							<Card className="h-96"></Card>
-							<Card className="h-96"></Card>
+							<Card className="h-96 overflow-y-scroll overflow-x-scroll">
+								<CustomerTab supabase={supabase} />
+							</Card>
 						</Grid>
 						<Card className="h-96 mt-6 overflow-y-scroll overflow-x-scroll">
 							<EmailCampaignsTab supabase={supabase} />
