@@ -20,7 +20,7 @@ export default function CatalogTable({ data, palmAI, customerData }) {
 	return (
 		<>
 			<Title>Your Catalog</Title>
-			<Table className="mt-5">
+			<Table>
 				<TableHead>
 					<TableRow>
 						<TableHeaderCell>Name</TableHeaderCell>
