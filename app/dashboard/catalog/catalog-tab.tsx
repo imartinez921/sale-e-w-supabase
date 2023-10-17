@@ -3,7 +3,7 @@ import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/CatalogTable";
-import { googleTextClient } from "../../utils/google-vertex-client";
+import { googleTextClient } from "../../utils/google-vertex-client.ts";
 
 export const dynamic = "force-dynamic";
 
