@@ -48,7 +48,7 @@ export default async function DashboardPage({
 				Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
 			</Text>
 
-			<TabGroup className="mt-6">
+			<TabGroup className="mt-6 p-2">
 				<TabList>
 					<Tab>Overview</Tab>
 					<Tab>Orders</Tab>
