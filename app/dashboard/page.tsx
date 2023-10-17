@@ -38,8 +38,6 @@ export default async function DashboardPage({
 	return (
 		// Main is everything except the header and the footer
 		<main>
-			<AppLogo width={250} />
-			<NavButton buttonText="Back" />
 			<Title>Dashboard</Title>
 			<Text>
 				Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
@@ -61,7 +59,7 @@ export default async function DashboardPage({
 							className="gap-6 mt-6"
 						>
 							{/* TODO: Need to figure out how to keep Catalog height in overview grid */}
-							<Card className="h-64 overflow-y-scroll">
+							<Card className="h-64 overflow-y-scroll overflow-x-scroll">
 								<CatalogTab supabase={supabase} />
 							</Card>
 							<Card>
@@ -93,10 +91,12 @@ export default async function DashboardPage({
 							</Card>
 						</div>
 					</TabPanel>
-					<TabPanel className="h-96">
-						<Card className="mt-6 h-full overflow-y-scroll">
-							<CatalogTab supabase={supabase} />
-						</Card>
+					<TabPanel>
+						<div className="h-96">
+							<Card className=" mt-6 h-full overflow-y-scroll">
+								<CatalogTab supabase={supabase} />
+							</Card>
+						</div>
 					</TabPanel>
 					<TabPanel>
 						<div className="mt-6">
