@@ -2,7 +2,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
-import CatalogTable from "../../components/catalog/catalog_table";
+import CatalogTable from "../../components/catalog/CatalogTable";
 import { googleTextClient } from "../../utils/google-vertex-client";
 
 export const dynamic = "force-dynamic";

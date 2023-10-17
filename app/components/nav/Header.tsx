@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import { Divider } from "@tremor/react";
 import { Subtitle } from "@tremor/react";
-import AvatarMini from "./Avatar-Mini";
+import AvatarMini from "./AvatarMini";
 import NavButton from "./NavButton";
-import AppLogo from "./logo";
+import AppLogo from "./Logo";
 
 export default function Header() {
 	return (

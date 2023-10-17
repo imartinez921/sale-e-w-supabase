@@ -4,7 +4,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import { Title, Bold } from "@tremor/react";
 
-import AppLogo from "./components/nav/logo";
+import AppLogo from "./components/nav/Logo";
 import Avatar from "./components/nav/Avatar";
 import NavButton from "./components/nav/NavButton";
 import LoginButton from "./components/nav/LoginButton";
