@@ -6,7 +6,7 @@ import AvatarMini from "./AvatarMini";
 import NavButton from "./NavButton";
 import AppLogo from "./AppLogo";
 
-export default function Header() {
+export default function DashboardHeader() {
 	return (
 		<>
 			<header className="h-24 flex items-center justify-between">
