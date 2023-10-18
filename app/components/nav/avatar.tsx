@@ -17,7 +17,7 @@ export default function Avatar({ name, imageUrl, socialUrl }: AvatarProps) {
 					<img
 						src={imageUrl}
 						title={name}
-						alt={`"headshot of "+{name}`}
+						// alt={`"headshot of "+{name}`}
 						className="avatar-image-reg"
 					/>
 				</Card>
