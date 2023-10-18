@@ -15,11 +15,7 @@ import {
 } from "@tremor/react";
 
 // This is the main overview page after logging in
-export default async function DashboardPage({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default async function DashboardPage() {
 	// Give this server component access to user's cookies
 	const supabase = createServerComponentClient({ cookies });
 
