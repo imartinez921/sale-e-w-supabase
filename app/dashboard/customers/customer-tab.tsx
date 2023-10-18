@@ -4,6 +4,8 @@ import { client } from "@/app/api/square/square-api";
 import { customersCreationData } from "@/app/utils/customer-data-array";
 import { SupabaseClient } from "@supabase/supabase-js";
 
+import CustomersTable from "../../components/customers/CustomersTable";
+
 const seedSquareCustomersAPI = async () => {
 	try {
 		customersCreationData.forEach(async (customer) => {
@@ -35,8 +37,20 @@ export default async function CustomersTab({
 	supabase: SupabaseClient;
 }) {
 	// seedSquareCustomersAPI();
-	const customerList = await listSquareCustomers();
-  return console.log("CUSTOMERS", customerList);
+	let customerData = await supabase.from("customers").select("*");
+  console.log(customerData)
+  let customersArray = [];
+
+  customerData?.data?.forEach(customer => {
+    console.log(customer.purchases)
+    let customerObject = {
+      id: customer.id,
+      email: customer.email,
+      phone_number: customer.phone_number,
+      purchases: customer.purchases
+    }
+    customersArray.push(customerObject)})
+  
 
 	// customerList?.customers?.forEach(async customer => {
 	//   const { data, error } = await supabase.from('customers').insert([{
@@ -63,9 +77,5 @@ export default async function CustomersTab({
 	//   }]).select()
 	// })
 
-	// return (
-	// 	<main className="p-4 md:p-10 mx-auto max-w-7xl">
-	// 		This is customer page
-	// 	</main>
-	// );
+	return (<CustomersTable customers={customerData.data} />)
 }
