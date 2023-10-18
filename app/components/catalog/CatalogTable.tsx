@@ -16,7 +16,18 @@ import {
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
-export default function CatalogTable({ data, palmAI, customerData }) {
+interface CatalogTableProps {
+	data: {
+		id: string;
+		name: string;
+		description: string;
+		price: string | null | undefined;
+	}[];
+	palmAI: any;
+	customerData: any;
+}
+
+export default function CatalogTable({ data, palmAI, customerData }: CatalogTableProps) {
 	const supabaseClient = createClientComponentClient();
 	const router = useRouter();
 

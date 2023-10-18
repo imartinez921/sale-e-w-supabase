@@ -123,6 +123,7 @@ export default async function CatalogTab({
 }) {
 	const catalogData = await catalogListing();
 	let catalogArray: {
+		id: string;
 		name: string;
 		description: string;
 		price: string | null | undefined;
@@ -147,13 +148,14 @@ export default async function CatalogTab({
 						`${variation?.itemVariationData?.priceMoney?.amount}` +
 							" USD" || "0 USD",
 				};
+				console.log(itemObject)
 				catalogArray.push(itemObject);
 			});
 		}
 	});
 
 	let customerData = await supabase.from("customers").select("*");
-
+	console.log(catalogArray);
 	return (
 		<CatalogTable
 			data={catalogArray}

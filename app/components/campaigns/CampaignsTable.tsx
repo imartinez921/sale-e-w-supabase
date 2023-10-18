@@ -15,7 +15,14 @@ import {
     Button
 } from "@tremor/react";
 
-export default function CampaignsTable({ data }) {
+interface CampaignsTableProps {
+	data: {
+		catalog_item: string;
+		emails: string[];
+	}[];
+}
+
+export default function CampaignsTable({ data }: CampaignsTableProps) {
     return (
 		<>
 			<Title>Your Email Campaigns</Title>
