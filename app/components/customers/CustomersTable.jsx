@@ -1,6 +1,5 @@
 "use client";
 import {
-	Card,
 	Table,
 	TableHead,
 	TableRow,
@@ -9,12 +8,11 @@ import {
 	TableCell,
 	Text,
 	Title,
-	Badge,
 	Button
 } from "@tremor/react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default function CustomersTable({ data, palmAI, customerData }) {
+export default function CustomersTable({ customers }) {
 	const supabaseClient = createClientComponentClient()
 
 	return (
@@ -23,40 +21,20 @@ export default function CustomersTable({ data, palmAI, customerData }) {
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableHeaderCell>Name</TableHeaderCell>
-						<TableHeaderCell>Description</TableHeaderCell>
-						<TableHeaderCell>
-							Price (single OR bulk)
-						</TableHeaderCell>
+						<TableHeaderCell>Email</TableHeaderCell>
+						<TableHeaderCell>Purchases</TableHeaderCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{data?.map((item) => (
-						<TableRow key={item.id}>
-							<TableCell>{item.name}</TableCell>
+					{customers?.map((customer) => (
+						// console.log("customer", customer)
+						<TableRow key={customer.id}>
+							<TableCell>{customer.email}</TableCell>
 							<TableCell>
-								<Text>{item.description}</Text>
+								<Text>{customer.description}</Text>
 							</TableCell>
 							<TableCell>
-								<Text>{item.price}</Text>
-							</TableCell>
-							<TableCell>
-								<Button
-									onClick={async () => {
-										const campaign = await palmAI(
-											customerData?.data,
-											item.name
-										);
-
-										const { data, error } =
-											await supabaseClient
-												.from("email_campaigns")
-												.insert([campaign])
-												.select();
-									}}
-								>
-									Create Sale Campaign
-								</Button>
+								<Text>{customer.price}</Text>
 							</TableCell>
 						</TableRow>
 					))}
