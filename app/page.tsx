@@ -5,7 +5,6 @@ import { Title, Bold } from "@tremor/react";
 
 import AppLogo from "components/nav/AppLogo";
 import Avatar from "components/nav/Avatar";
-// import LandingAvatar from "components/nav/LandingAvatar";
 import NavButton from "components/nav/NavButton";
 import LoginButton from "components/nav/LoginButton";
 import LandingHeader from "components/nav/LandingHeader";
