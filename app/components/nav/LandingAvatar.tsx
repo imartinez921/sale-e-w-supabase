@@ -19,7 +19,6 @@ export default function LandingAvatar({ name, imageUrl, socialUrl }: AvatarProps
 					alt={`"headshot of "+{name}`}
 					className="avatar-image-reg"
 				/>
-				;
 			</Card>
 		</a>
 	); 

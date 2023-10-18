@@ -4,8 +4,8 @@ import { cookies } from "next/headers";
 import { Title, Bold } from "@tremor/react";
 
 import AppLogo from "components/nav/AppLogo";
-// import Avatar from "components/nav/Avatar";
-import LandingAvatar from "components/nav/LandingAvatar";
+import Avatar from "components/nav/Avatar";
+// import LandingAvatar from "components/nav/LandingAvatar";
 import NavButton from "components/nav/NavButton";
 import LoginButton from "components/nav/LoginButton";
 import LandingHeader from "components/nav/LandingHeader";
@@ -52,17 +52,17 @@ export default async function Index() {
 						<Bold>Contributors: </Bold>
 					</Title>
 					<div className="flex space-x-4 ">
-						<LandingAvatar
+						<Avatar
 							name="Noah Nim"
 							imageUrl="https://avatars.githubusercontent.com/u/8650503?v=4"
 							socialUrl="https://www.linkedin.com/in/noah-medoff-6a5490116"
 						/>
-						<LandingAvatar
+						<Avatar
 							name="Irene Martinez"
 							imageUrl="https://avatars.githubusercontent.com/u/102888592?v=4"
 							socialUrl="https://www.linkedin.com/in/irenemartinez921/"
 						/>
-						<LandingAvatar
+						<Avatar
 							name="Robert Lemiesz"
 							imageUrl="https://media.licdn.com/dms/image/C5603AQGiCo95wjIaQw/profile-displayphoto-shrink_800_800/0/1525150606355?e=1703116800&v=beta&t=HkgMjC1yjzXnAYx-pga5xY8-HHpci68JB1PsqHSUEl4"
 							socialUrl="https://www.linkedin.com/in/robert-lemiesz-a8b48679/"
