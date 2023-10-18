@@ -16,7 +16,7 @@ export default function LandingAvatar({ name, imageUrl, socialUrl }: AvatarProps
 				<img
 					src={imageUrl}
 					title={name}
-					alt=""
+					alt={`"headshot of "+{name}`}
 					className="avatar-image-reg"
 				/>
 				;
