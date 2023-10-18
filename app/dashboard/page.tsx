@@ -1,7 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import CatalogTab from "./catalog/catalog-tab";
-import CustomerTab from "./customers/customer-tab";
 import EmailCampaignsTab from "./recommendations/email-campaigns-tab";
 
 import {
