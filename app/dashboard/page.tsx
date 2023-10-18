@@ -24,17 +24,7 @@ export default async function DashboardPage({
 	// Give this server component access to user's cookies
 	const supabase = createServerComponentClient({ cookies });
 
-	// Execute all data to be passed to props here:
-	// TODO?: Fetch past email campaigns data from Supabase and pass to corresponding component to render
-
-	// Testing: Pretty print result
-	// return <pre>{JSON.stringify(data,null,2)}</pre>
-
-	// createEndpoint();
-	// listGoogleEndpoints();
-
 	return (
-		// Main is everything except the header and the footer
 		<main>
 			<Title>Dashboard</Title>
 
