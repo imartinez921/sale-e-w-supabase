@@ -31,7 +31,6 @@ export default async function DashboardPage({
 			<TabGroup className="mt-6 p-2">
 				<TabList>
 					<Tab>Overview</Tab>
-					<Tab>Customers</Tab>
 					<Tab>Catalog</Tab>
 					<Tab>Email Campaigns</Tab>
 				</TabList>
@@ -46,19 +45,9 @@ export default async function DashboardPage({
 								<CatalogTab supabase={supabase} />
 							</Card>
 							<Card className="h-96 overflow-y-scroll overflow-x-scroll">
-								<CustomerTab supabase={supabase} />
+								<EmailCampaignsTab supabase={supabase} />
 							</Card>
 						</Grid>
-						<Card className="h-96 mt-6 overflow-y-scroll overflow-x-scroll">
-							<EmailCampaignsTab supabase={supabase} />
-						</Card>
-					</TabPanel>
-					<TabPanel>
-						<div className="mt-6">
-							<Card>
-								<div className="h-96" />
-							</Card>
-						</div>
 					</TabPanel>
 					<TabPanel>
 						<div className="h-96">
