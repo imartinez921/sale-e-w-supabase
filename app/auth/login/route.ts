@@ -2,10 +2,6 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-// from code example, unsure why type is erroring
-// https://supabase.com/docs/guides/auth/auth-helpers/nextjs?language=ts
-import type { Database } from "@/lib/database.types";
-
 export const dynamic = "force-dynamic";
 
 // No sign-in form for now, so this will be a GET request
@@ -13,7 +9,7 @@ export async function GET(request: Request) {
 	const requestUrl = new URL(request.url);
 
 	// AuthHelper gives Route Handler access to credentials in our .env + client cookies
-	const supabase = createRouteHandlerClient<Database>({ cookies });
+	const supabase = createRouteHandlerClient({ cookies });
 
 	// Auto-Login ONE user – already added to the users table via our Supabase dashboard
 	// Same info as our Square Dashboard mutual account
