@@ -1,10 +1,10 @@
 "use server";
 
-import { client } from "@/app/api/square/square-api";
-import { customersCreationData } from "@/app/utils/customer-data-array";
+import { client } from "api/square/square-api";
+import { customersCreationData } from "utils/customer-data-array";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-import CustomersTable from "../../components/customers/CustomersTable";
+import CustomersTable from "components/customers/CustomersTable";
 
 const seedSquareCustomersAPI = async () => {
 	try {

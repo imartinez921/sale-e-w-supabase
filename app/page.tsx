@@ -3,11 +3,11 @@ import { cookies } from "next/headers";
 
 import { Title, Bold } from "@tremor/react";
 
-import AppLogo from "./components/nav/AppLogo";
-import Avatar from "./components/nav/Avatar";
-import NavButton from "./components/nav/NavButton";
-import LoginButton from "./components/nav/LoginButton";
-import LandingHeader from "./components/nav/LandingHeader";
+import AppLogo from "components/nav/AppLogo";
+import Avatar from "components/nav/Avatar";
+import NavButton from "components/nav/NavButton";
+import LoginButton from "components/nav/LoginButton";
+import LandingHeader from "components/nav/LandingHeader";
 
 export const dynamic = "force-dynamic";
 

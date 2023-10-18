@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import logo from "../../assets/images/logo.svg";
+import logo from "assets/images/logo.svg";
 
 interface AppLogoProps {
 	width?: number;

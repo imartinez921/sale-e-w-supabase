@@ -1,6 +1,6 @@
 "use server"
 import { SupabaseClient } from "@supabase/supabase-js";
-import CampaignsTable from "../../components/campaigns/CampaignsTable"
+import CampaignsTable from "components/campaigns/CampaignsTable"
 
 
 export default async function EmailCampaignsTab({
