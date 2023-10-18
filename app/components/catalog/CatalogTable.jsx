@@ -1,4 +1,5 @@
 "use client";
+
 import {
 	Card,
 	Table,
@@ -10,12 +11,14 @@ import {
 	Text,
 	Title,
 	Badge,
-	Button
+	Button,
 } from "@tremor/react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
 export default function CatalogTable({ data, palmAI, customerData }) {
-	const supabaseClient = createClientComponentClient()
+	const supabaseClient = createClientComponentClient();
+	const router = useRouter();
 
 	return (
 		<>
@@ -25,9 +28,7 @@ export default function CatalogTable({ data, palmAI, customerData }) {
 					<TableRow>
 						<TableHeaderCell>Name</TableHeaderCell>
 						<TableHeaderCell>Description</TableHeaderCell>
-						<TableHeaderCell>
-							Price (by bulk)
-						</TableHeaderCell>
+						<TableHeaderCell>Price (by bulk)</TableHeaderCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -51,7 +52,7 @@ export default function CatalogTable({ data, palmAI, customerData }) {
 										const { data, error } =
 											await supabaseClient
 												.from("email_campaigns")
-												.insert([campaign])
+												.insert(campaign)
 												.select();
 									}}
 								>
