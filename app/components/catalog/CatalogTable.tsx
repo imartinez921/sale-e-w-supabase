@@ -14,9 +14,9 @@ import {
 	Button,
 } from "@tremor/react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
+import CampaignButton from "./CampaignButton";
 
-interface CatalogTableProps {
+export interface CatalogTableProps {
 	data: {
 		id: string;
 		name: string;
@@ -29,7 +29,6 @@ interface CatalogTableProps {
 
 export default function CatalogTable({ data, palmAI, customerData }: CatalogTableProps) {
 	const supabaseClient = createClientComponentClient();
-	const router = useRouter();
 
 	return (
 		<>
@@ -53,23 +52,7 @@ export default function CatalogTable({ data, palmAI, customerData }: CatalogTabl
 								<Text>{item.price}</Text>
 							</TableCell>
 							<TableCell>
-								<Button
-									onClick={async () => {
-										const campaign = await palmAI(
-											customerData?.data,
-											item.name
-										);
-
-										const { data, error } =
-											await supabaseClient
-												.from("email_campaigns")
-												.insert(campaign)
-												.select();
-										router.refresh();
-									}}
-								>
-									Create Sale Campaign
-								</Button>
+								<CampaignButton item={item} supabaseClient={supabaseClient} palmAI={palmAI} customerData={customerData} />
 							</TableCell>
 						</TableRow>
 					))}
