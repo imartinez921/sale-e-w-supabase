@@ -3,7 +3,7 @@ import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
 import CatalogTable from "../../components/catalog/CatalogTable";
-import { googleTextClient } from "../../utils/google-vertex-client.ts";
+import { googleTextClient } from "../../utils/google-vertex-client";
 
 export const dynamic = "force-dynamic";
 
@@ -132,8 +132,8 @@ export default async function CatalogTab({
 		if (catalogObject.type !== "ITEM") return;
 		// Key into each item and pull out variations
 		const itemData = catalogObject.itemData;
-		if (itemData?.variations?.length > 0) {
-			itemData?.variations?.map((variation, index) => {
+		if (itemData?.variations?.length && itemData?.variations?.length > 0) {
+			itemData.variations.map((variation, index) => {
 				const itemObject = {
 					id: variation?.itemVariationData?.itemId + "-" + index,
 					name:
@@ -149,7 +149,7 @@ export default async function CatalogTab({
 				};
 				catalogArray.push(itemObject);
 			});
-		};
+		}
 	});
 
 	let customerData = await supabase.from("customers").select("*");
