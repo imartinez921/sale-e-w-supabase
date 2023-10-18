@@ -54,6 +54,7 @@ export default function CatalogTable({ data, palmAI, customerData }) {
 												.from("email_campaigns")
 												.insert(campaign)
 												.select();
+										router.refresh();
 									}}
 								>
 									Create Sale Campaign
