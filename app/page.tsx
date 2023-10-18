@@ -34,7 +34,7 @@ export default async function Index() {
 			<div className="flex flex-col items-center h-auto pt-16 pb-16">
 				<AppLogo width={500} />
 				<Title className="pt-8">
-					The app that keeps your customers happy and your Square
+					The AI that keeps your customers happy and your Square
 					overstock low.
 				</Title>
 				{session ? (
