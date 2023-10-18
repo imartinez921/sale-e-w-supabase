@@ -8,10 +8,12 @@ interface AvatarProps {
 	socialUrl: string;
 }
 
-export default function LandinAvatar({ name, imageUrl, socialUrl }: AvatarProps) {
+export default function LandingAvatar({ name, imageUrl, socialUrl }: AvatarProps) {
     return (
 		<a href={socialUrl}>
-			<img src={imageUrl} title={name} alt="" />;
+			<Card className="flex flex-col gap-2 justify-center items-center">
+				<img src={imageUrl} title={name} alt="" />;
+			</Card>
 		</a>
 	); 
 }
