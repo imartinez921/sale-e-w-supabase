@@ -26,7 +26,7 @@ export default function CatalogTable({ data, palmAI, customerData }) {
 						<TableHeaderCell>Name</TableHeaderCell>
 						<TableHeaderCell>Description</TableHeaderCell>
 						<TableHeaderCell>
-							Price (single OR bulk)
+							Price (by bulk)
 						</TableHeaderCell>
 					</TableRow>
 				</TableHead>
