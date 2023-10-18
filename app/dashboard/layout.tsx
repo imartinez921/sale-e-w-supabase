@@ -11,11 +11,9 @@ import {
 	TabPanel,
 	TabPanels,
 } from "@tremor/react";
-
-import CatalogPage from "./catalog/page.tsx";
-import NavButton from "../components/nav/NavButton";
 import Link from "next/link";
-import AppLogo from "../components/nav/logo";
+
+import Header from "../components/nav/DashboardHeader";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +25,10 @@ export default function DashboardLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		// Main is everything except the header and the footer
-		<main>{children}</main>
+		<div className="flex flex-col">
+			<Header />
+			{/* Main is everything except the header and the footer */}
+			{children}
+		</div>
 	);
 }

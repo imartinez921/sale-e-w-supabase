@@ -8,3 +8,15 @@
 body {
   margin: 15px;
 }
+
+.avatar-image-reg {
+  @apply rounded-full h-36 w-36;
+}
+
+.avatar-image-mini {
+  @apply rounded-full h-12 w-12 hover:opacity-40;
+}
+
+.avatar-text {
+  @apply flex gap-8 justify-center items-center;
+}

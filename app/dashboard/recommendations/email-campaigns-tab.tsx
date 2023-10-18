@@ -1,9 +1,9 @@
 "use server"
 import { SupabaseClient } from "@supabase/supabase-js";
-import RecommendationsTable from "../../components/recommendations/recommendations"
+import CampaignsTable from "../../components/campaigns/CampaignsTable"
 
 
-export default async function EmailCampaignsPage({
+export default async function EmailCampaignsTab({
 	supabase,
 }: {
 	supabase: SupabaseClient
@@ -18,12 +18,12 @@ export default async function EmailCampaignsPage({
 
 	campaignInfo?.data?.map(campaign => {
 		const campaignObject = {
+			id: campaign?.id,
 			catalog_item: campaign?.catalog_item,
 			emails: campaign?.emails.split(",")
 		}
 		campaignArray.push(campaignObject)
 	})
 
-	// console.log(campaignArray)
-	return <RecommendationsTable data={campaignArray} />
+	return <CampaignsTable data={campaignArray} />
 }

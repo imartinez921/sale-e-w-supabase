@@ -1,9 +1,9 @@
-import { SupabaseClient } from "@supabase/supabase-js"
+import { SupabaseClient } from "@supabase/supabase-js";
 import { catalog_data_array } from "@/app/utils/catalog-data-array";
 import { client } from "@/app/api/square/square-api";
 
-import CatalogTable from "../../components/catalog/catalog_table.jsx";
-import { googleTextClient } from "../../utils/google-vertex-client";
+import CatalogTable from "../../components/catalog/CatalogTable";
+import { googleTextClient } from "../../utils/google-vertex-client.ts";
 
 export const dynamic = "force-dynamic";
 
@@ -36,34 +36,33 @@ export async function catalogListing() {
 
 // function to get an array of emails for the item you put on sale
 async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
-	"use server"
+	"use server";
 	const MODEL_NAME = "models/text-bison-001";
 	const customersData: {
-		email: string,
-		purchases: {}
-	}[] = []
+		email: string;
+		purchases: {};
+	}[] = [];
 
-	customerInfoList?.forEach(customer => {
-
+	customerInfoList?.forEach((customer) => {
 		const customerData = {
 			email: customer?.email,
-			purchases: customer?.purchases
-		}
+			purchases: customer?.purchases,
+		};
 
-		customersData.push(customerData)
-	})
+		customersData.push(customerData);
+	});
 
-	let customerStringedArray: any[] = []
+	let customerStringedArray: any[] = [];
 
-	customersData.forEach(customer => {
-		let stringed = JSON.stringify(customer)
+	customersData.forEach((customer) => {
+		let stringed = JSON.stringify(customer);
 
-		customerStringedArray.push(stringed)
-	})
+		customerStringedArray.push(stringed);
+	});
 
-	let customersStringed = customerStringedArray.toString()
+	let customersStringed = customerStringedArray.toString();
 
-	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses`
+	const promptString = `Using this list of customer data: ${customersStringed} find out which customers buy ${catalogItem} the most and repond only with a list of their email addresses`;
 	// let messages = [{ content: promptString }]
 
 	// console.log(messages)
@@ -88,42 +87,39 @@ async function askPalmAI(customerInfoList: any[] | null, catalogItem: string) {
 			// optional, safety settings
 			// safety_settings: [{ "category": "HARM_CATEGORY_DEROGATORY", "threshold": 1 }, { "category": "HARM_CATEGORY_TOXICITY", "threshold": 1 }, { "category": "HARM_CATEGORY_VIOLENCE", "threshold": 2 }, { "category": "HARM_CATEGORY_SEXUAL", "threshold": 2 }, { "category": "HARM_CATEGORY_MEDICAL", "threshold": 2 }, { "category": "HARM_CATEGORY_DANGEROUS", "threshold": 2 }],
 			prompt: {
-				text: promptString
+				text: promptString,
 			},
-		})
+		});
 
 		if (result[0]?.candidates[0]?.output === undefined) {
 			console.log("No customers buy that item enough");
 		} else {
-			const res = result[0]?.candidates[0]?.output?.split("\n")
-			let customer_emails: any[] = []
+			const res = result[0]?.candidates[0]?.output?.split("\n");
+			let customer_emails: any[] = [];
 			res.forEach((customer: string) => {
 				// if (!(customer in customer_emails)) {
 				// 	customer_emails[customer] = customer
 				// }
-				customer_emails.push(customer)
-			}
-			)
+				customer_emails.push(customer);
+			});
 
 			const campaign = {
 				catalog_item: catalogItem,
-				emails: customer_emails.toString()
-			}
+				emails: customer_emails.toString(),
+			};
 
-			return campaign
+			return campaign;
 		}
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 		console.log("No customers buy that item enough");
 	}
 }
 
-
-
-export default async function CatalogPage({
+export default async function CatalogTab({
 	supabase,
 }: {
-	supabase: SupabaseClient
+	supabase: SupabaseClient;
 }) {
 	const catalogData = await catalogListing();
 	let catalogArray: {
@@ -136,22 +132,33 @@ export default async function CatalogPage({
 		if (catalogObject.type !== "ITEM") return;
 		// Key into each item and pull out variations
 		const itemData = catalogObject.itemData;
-		if (itemData?.variations) {
-			itemData.variations.map((variation) => {
-				// console.log(variation.itemVariationData);
+		if (itemData?.variations?.length > 0) {
+			itemData?.variations?.map((variation, index) => {
 				const itemObject = {
-					id: variation.itemVariationData?.itemId,
-					name: itemData.name + " (" + variation?.itemVariationData?.name + ")" || "",
+					id: variation?.itemVariationData?.itemId + "-" + index,
+					name:
+						itemData.name +
+							" (" +
+							variation?.itemVariationData?.name +
+							")" || "",
 					description: itemData?.description || "",
 					// This value is a BigInt so convert to string
-					price: `${variation?.itemVariationData?.priceMoney?.amount}` + " USD" || "0 USD",
+					price:
+						`${variation?.itemVariationData?.priceMoney?.amount}` +
+							" USD" || "0 USD",
 				};
 				catalogArray.push(itemObject);
 			});
-		}
+		};
 	});
 
-	let customerData = await supabase.from('customers').select('*')
+	let customerData = await supabase.from("customers").select("*");
 
-	return <CatalogTable data={catalogArray} palmAI={askPalmAI} customerData={customerData} />;
+	return (
+		<CatalogTable
+			data={catalogArray}
+			palmAI={askPalmAI}
+			customerData={customerData}
+		/>
+	);
 }

@@ -1,9 +1,13 @@
+"use client";
+
+import { Button } from "@tremor/react";
+
 export default function LogoutButton() {
-  return (
-    <form action="/auth/logout" method="post">
-      <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-        Logout
-      </button>
-    </form>
-  )
+	return (
+		<form action="/auth/logout" method="post">
+			<Button size="xs" variant="secondary">
+				Logout
+			</Button>
+		</form>
+	);
 }
