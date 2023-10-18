@@ -1,4 +1,5 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 import { Title, Bold } from "@tremor/react";
 
@@ -12,7 +13,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Index() {
 	// Give this server component access to cookies
-	const supabase = createClientComponentClient();
+	const supabase = createServerComponentClient({ cookies });
 
 	// Check if user is logged in
 	let email = "";
@@ -29,7 +30,7 @@ export default async function Index() {
 	return (
 		<>
 			{session && <LandingHeader email={email} />}
-			{!session && (<div className="pt-32"></div>)}
+			{!session && <div className="pt-32"></div>}
 			<div className="flex flex-col items-center h-auto pt-16 pb-16">
 				<AppLogo width={500} />
 				<Title className="pt-8">
