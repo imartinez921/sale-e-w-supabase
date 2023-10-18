@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import Footer from "./components/nav/Footer";
+import Footer from "./components/nav/Footer.jsx";
 
 export const dynamic = "force-dynamic";
 
