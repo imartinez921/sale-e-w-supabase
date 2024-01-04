@@ -8,4 +8,4 @@
 - Styling with [Tailwind CSS](https://tailwindcss.com)
 - Deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
 
-## [Demo video here, as API access has already been revoked.](https://vimeo.com/875813744?share=copy)
+## [Demo video here, as hackathon API access has already been revoked.](https://vimeo.com/875813744?share=copy)
