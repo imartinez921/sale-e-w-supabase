@@ -31,7 +31,7 @@ export default function DashboardHeader() {
 						/>
 						<AvatarMini
 							name="Robert Lemiesz"
-							imageUrl="https://media.licdn.com/dms/image/C5603AQGiCo95wjIaQw/profile-displayphoto-shrink_800_800/0/1525150606355?e=1703116800&v=beta&t=HkgMjC1yjzXnAYx-pga5xY8-HHpci68JB1PsqHSUEl4"
+							imageUrl="https://imartinez921-bucket.s3.amazonaws.com/robert.jpeg"
 							socialUrl="https://www.linkedin.com/in/robert-lemiesz-a8b48679/"
 						/>
 					</div>
