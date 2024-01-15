@@ -1,5 +1,6 @@
 
-## [Demo video here](https://vimeo.com/875813744?share=copy), as hackathon API access has already been revoked.
+## Demo video [here](https://vimeo.com/875813744?share=copy)
+## Live on [Vercel](https://sale-e-w-supabase.vercel.app/)
 
 <hr>
 
